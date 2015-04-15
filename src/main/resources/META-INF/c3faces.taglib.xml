@@ -1,0 +1,960 @@
+<?xml version="1.0"?>
+<facelet-taglib>
+    <namespace>http://c3faces.martinlinha.com/ns</namespace>
+    <tag>
+        <tag-name>step</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.Step</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>spline</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.Spline</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <tag-name>scatter</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.Scatter</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <tag-name>pie</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.Pie</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>line</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.Line</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>gauge</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.Gauge</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>donut</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.Donut</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+        
+    <tag>
+        <tag-name>areaSpline</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.AreaSpline</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <tag-name>bar</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.Bar</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>area</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.Area</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    <tag>
+
+        <tag-name>areaStep</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.AreaStep</component-type>
+        </component>
+        <attribute>
+            <description>A reference to Data instance which holds data.</description>
+            <name>data</name>
+            <required>true</required>
+            <type>com.martinlinha.c3faces.script.property.Data</type>
+        </attribute>
+        <attribute>
+            <description>CSS style attributes for chart containing div element.</description>
+            <name>style</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Class associated to chart containing div element.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A reference to C3ViewDataSet which holds actual selection.</description>
+            <name>value</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.model.C3ViewDataSet</type>
+        </attribute>
+        <attribute>
+            <description>
+                The ValueExpression linking this component to a property in a backing bean
+            </description>
+            <name>
+                binding
+            </name>
+            <required>
+                false
+            </required>
+            <deferred-value>
+                <type>
+                    javax.faces.component.UIComponent
+                </type>
+            </deferred-value>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <tag-name>zoom</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.ZoomProperty</component-type>
+        </component>
+        <attribute>
+            <description>True if chart zooming should be enabled.</description>
+            <name>enabled</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>Y axis domain will be updated to the zoomed region, if true is set. Default false.</description>
+            <name>rescale</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>The begin of potential chart extent. Default is 1.</description>
+            <name>extentFrom</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>The end of potential chart extent. Default is 10.</description>
+            <name>extentTo</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Javascript to be executed when zooming is performed.</description>
+            <name>onzoom</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>tooltip</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.TooltipProperty</component-type>
+        </component>
+        <attribute>
+            <description>A flag whether to show tooltip or not.</description>
+            <name>show</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>If true set, tooltip will be grouped for corresponding data points. Default true.</description>
+            <name>grouped</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <tag-name>donutProperties</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.DonutProperty</component-type>
+        </component>
+        <attribute>
+            <description>A width of donut in px.</description>
+            <name>width</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Title to show in center of donut.</description>
+            <name>title</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A flag whether to enable pie pieces expanding or not. Default true.</description>
+            <name>expand</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>A flag whether to enable labels to show or not. Default true.</description>
+            <name>showLabels</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>barProperties</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.BarProperty</component-type>
+        </component>
+        <attribute>
+            <description>Set if min or max value will be 0 on bar chart. Default true.</description>
+            <name>zerobased</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>A width of bar in px.</description>
+            <name>width</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>gaugeProperties</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.GaugeProperty</component-type>
+        </component>
+        <attribute>
+            <description>A width of gauge in px.</description>
+            <name>width</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Minimum value to show in gauge. Default 0.</description>
+            <name>min</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Maximum value to show in gauge. Default 100.</description>
+            <name>max</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Units to show in gauge.</description>
+            <name>units</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A flag whether to enable gauge expanding or not. Default true.</description>
+            <name>expand</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>A flag whether to enable labels to show or not. Default true.</description>
+            <name>showLabels</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>gridX</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.GridXProperty</component-type>
+        </component>
+        <attribute>
+            <description>A value of X axis where grid will be rendered.</description>
+            <name>value</name>
+            <required>true</required>
+            <type>java.lang.Double</type>
+        </attribute>
+        <attribute>
+            <description>A text to show next to the grid.</description>
+            <name>text</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>gridY</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.GridYProperty</component-type>
+        </component>
+        <attribute>
+            <description>A value of Y axis where grid will be rendered.</description>
+            <name>value</name>
+            <required>true</required>
+            <type>java.lang.Double</type>
+        </attribute>
+        <attribute>
+            <description>A text to show next to the grid.</description>
+            <name>text</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <tag-name>grids</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.GridsProperty</component-type>
+        </component>
+        <attribute>
+            <description>Set if X grids should be rendered. Default true.</description>
+            <name>showX</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>Set if Y grids should be rendered. Default true.</description>
+            <name>showY</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>legend</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.LegendProperty</component-type>
+        </component>
+        <attribute>
+            <description>Defines the position of legend. Allowed values are BOTTOM, RIGHT, INSET. Default BOTTOM.</description>
+            <name>position</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.component.script.property.Legend.Position</type>
+        </attribute>
+        <attribute>
+            <description>A flag to indicate if legend should be showed.</description>
+            <name>show</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>True if legend should be hidden.</description>
+            <name>hide</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>If position is set to INSET, one can define an anchor. Allowed are TOPLEFT, TOPRIGHT, 
+                BOTTOMLEFT, BOTTOMRIGHT. Default TOPLEFT. </description>
+            <name>insetAnchor</name>
+            <required>false</required>
+            <type>com.martinlinha.c3faces.component.script.property.Legend.InsetAnchor</type>
+        </attribute>
+        <attribute>
+            <description>Defines X position of anchor if INSET is set.</description>
+            <name>insetX</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Defines Y position of anchor if INSET is set.</description>
+            <name>insetY</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Defines max legend steps of anchor if INSET is set.</description>
+            <name>insetStep</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Javascript to be executed when click on legend is performed.</description>
+            <name>onclick</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Javascript to be executed when mouse over the legend is performed.</description>
+            <name>onmouseover</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Javascript to be executed when mouse left the legend.</description>
+            <name>onmouseout</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>padding</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.PaddingProperty</component-type>
+        </component>
+        <attribute>
+            <description>Top padding in px.</description>
+            <name>top</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Right padding in px.</description>
+            <name>right</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Left padding in px.</description>
+            <name>left</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Bottom padding in px.</description>
+            <name>bottom</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>pieProperties</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.PieProperty</component-type>
+        </component>
+        <attribute>
+            <description>A flag whether to enable pie pieces expanding or not. Default true.</description>
+            <name>expand</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>A flag whether to enable labels to show or not. Default true.</description>
+            <name>showLabels</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>point</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.PointProperty</component-type>
+        </component>
+        <attribute>
+            <description>A flag whether to show chart points or not. Default true.</description>
+            <name>show</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>Radius of each point.</description>
+            <name>r</name>
+            <required>false</required>
+            <type>java.lang.Double</type>
+        </attribute>
+        <attribute>
+            <description>Boolean if point can be expanded.</description>
+            <name>expand</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>Radius of expanded point.</description>
+            <name>expandR</name>
+            <required>false</required>
+            <type>java.lang.Double</type>
+        </attribute>
+        <attribute>
+            <description>Radius of selected point.</description>
+            <name>selectR</name>
+            <required>false</required>
+            <type>java.lang.Double</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>regions</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.RegionsProperty</component-type>
+        </component>
+    </tag>
+    <tag>
+        <tag-name>region</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.RegionProperty</component-type>
+        </component>
+        <attribute>
+            <description>Defines axis where region should be rendered. X or Y.</description>
+            <name>axis</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines where region should start.</description>
+            <name>start</name>
+            <required>false</required>
+            <type>java.lang.Double</type>
+        </attribute>
+        <attribute>
+            <description>Defines where region should ends.</description>
+            <name>end</name>
+            <required>false</required>
+            <type>java.lang.Double</type>
+        </attribute>
+        <attribute>
+            <description>CSS class attached to region.</description>
+            <name>cssClass</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>size</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.SizeProperty</component-type>
+        </component>
+        <attribute>
+            <description>Width of chart.</description>
+            <name>width</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Height of chart.</description>
+            <name>height</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>subchart</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.SubchartProperty</component-type>
+        </component>
+        <attribute>
+            <description>Defines if subchart should be rendered.</description>
+            <name>show</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+        <attribute>
+            <description>Height of subchart.</description>
+            <name>height</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+        <attribute>
+            <description>Javascript to be executed when brush event is performed.</description>
+            <name>onbrush</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>transition</tag-name>
+        <component>
+            <component-type>com.martinlinha.c3faces.component.property.TransitionProperty</component-type>
+        </component>
+        <attribute>
+            <description>Defines duration of transitions in millis.
+                Attention! Changes made to transition must be also made to all Modifiers. I.e. all Modifier objects must have same/longer 
+                transition then the value specified here. 
+                Otherwise it's very probable, that there will be animation problems (some modifier will cancel animation of another, because of its start before the transition ends).</description>
+            <name>duration</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
+        </attribute>
+    </tag>
+</facelet-taglib> 

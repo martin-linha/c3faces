@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <composite:interface >
+        <composite:attribute name="model" />
+        <composite:actionSource   name="buttonHelper"  targets="#{cc.clientId}:buttonHelper"/>
+
+    </composite:interface>
+
+
+    <composite:implementation >
+
+        <ui:remove>
+            ---> Div section definition --------------->
+        </ui:remove>
+        <div id="#{cc.clientId}">
+            <h:inputHidden id="indexHolder" />
+            <h:commandButton id="buttonHelper" style="visibility: hidden;" />
+
+            <h:outputText value="sss" 
+            
+            <ui:remove>
+                ---> Script section definition --------------->
+            </ui:remove>
+            <ui:fragment rendered="#{facesContext.partialViewContext.ajaxRequest}">
+                <script>
+                    var chart = "#{cc.clientId}".replace(/:/g, "\\:");
+                    var svg = d3.select("#" + chart).append("svg").append("g");
+                    svg.append("g").attr("class", "slices");
+                    svg.append("g").attr("class", "labels");
+                    svg.append("g").attr("class", "lines");
+                    var width = 960;
+                    var height = 450;
+                    var radius = 150;
+                    var pie = d3.layout.pie().sort(null).value(function (d) {
+                        return d.value;
+                    });
+                    var arc = d3.svg.arc().outerRadius(120.0).innerRadius(60.0);
+                    var outerArc = d3.svg.arc().outerRadius(80.0).innerRadius(135.0);
+                    svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                    var key = function (d) {
+                        return d.data.label;
+                    };
+                    var showLabels = true;
+                    var actualIndex = -1;
+                    change([{"color": "#d3ffce", "index": 0, "label": "London", "value": 11022}, {"color": "#ccff00", "index": 1, "label": "Manchester", "value": 822}, {"color": "#8d93e1", "index": 2, "label": "Oxford", "value": 5301}, {"color": "#4752e0", "index": 3, "label": "Birmingham", "value": 3101}, {"color": "#8f8fa4", "index": 4, "label": "Crystal Palace", "value": 301}], 50, true);
+                    svg.select(".slices").selectAll("path.slice").on("click", function click(d)
+                    {
+                        var path = '#{cc.clientId}'.replace(/:/g, "\\:");
+                        $("input[name='" + path + ":indexHolder']").attr('value', d.data.index);
+                        $("input[name='" + path + ":buttonHelper']").click();
+                        change([{"color": "#ccff00", "index": 1, "label": "Manchester", "value": 822}, {"color": "#8d93e1", "index": 2, "label": "Oxford", "value": 5301}, {"color": "#4752e0", "index": 3, "label": "Birmingham", "value": 3101}, {"color": "#8f8fa4", "index": 4, "label": "Crystal Palace", "value": 301}], 50, true);
+                    });
+                </script>
+            </ui:fragment>
+        </div>
+
+    </composite:implementation>
+</html>
