@@ -1,7 +1,6 @@
 package com.martinlinha.c3faces.script;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 /**
  *
@@ -62,7 +61,7 @@ public class ValueProp extends Property {
 
     public ValueProp(String name, Property... properties) {
         setName(name);
-        setChildren(new HashSet(Arrays.asList(properties)));
+        addChildren(Arrays.asList(properties));
     }
 
     @Override
@@ -77,7 +76,7 @@ public class ValueProp extends Property {
 
     @Override
     public String getBody() {
-        if (super.getBody() != null && isBodyQuoted()) {
+        if (super.getBody() != null && !super.getBody().isEmpty() && isBodyQuoted()) {
             return "'" + super.getBody() + "'";
         }
         return super.getBody();
@@ -85,7 +84,7 @@ public class ValueProp extends Property {
 
     @Override
     public String getName() {
-        if (super.getName() != null && isNameQuoted()) {
+        if (super.getName() != null && !super.getName().isEmpty() && isNameQuoted()) {
             return "'" + super.getName() + "'";
         }
         return super.getName();

@@ -12,6 +12,8 @@ import com.martinlinha.c3faces.script.modifier.TransformTypes;
 import com.martinlinha.c3faces.script.property.Bindto;
 import com.martinlinha.c3faces.script.property.Data;
 import com.martinlinha.c3faces.script.property.OnclickMethod;
+import com.martinlinha.c3faces.script.property.Transition;
+import com.martinlinha.c3faces.util.Faces;
 import com.martinlinha.c3faces.util.JSBuilder;
 import com.martinlinha.c3faces.util.JSTools;
 import java.io.IOException;
@@ -26,14 +28,9 @@ import javax.faces.component.UIInput;
 import javax.faces.component.behavior.ClientBehavior;
 import javax.faces.component.behavior.ClientBehaviorContext;
 import javax.faces.component.behavior.ClientBehaviorHolder;
-import javax.faces.component.html.HtmlInputHidden;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.context.PartialResponseWriter;
 import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -51,29 +48,25 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
 
     private final C3Manager manager;
     private Data data;
-    private HtmlInputHidden hiddenIndexHolder;
     private String javaScriptVar;
     private String divId;
 
-    // Components request-resist attributes
+    // Components request-resist attributes ------------------------------------------------------------------
     private enum PropertyKeys {
 
-        data, cssClass, style, componentProperties
+        data, cssClass, style, componentProperties, lastGeneratedScript
     }
 
     // Constants and default values ------------------------------------------------------------------
     private static final String DIV_APPENDER = "chart";
-    private static final Logger LOGGER = LoggerFactory.getLogger(C3Chart.class);
     private static final String HIDDEN_NAME = "Index";
     private static final String ATTR_DATA = "data";
 
     // Basic settings ------------------------------------------------------------------------------
     public C3Chart() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        if (externalContext.getSessionMap().get(C3Manager.SESSION_KEY) == null) {
-            externalContext.getSessionMap().put(C3Manager.SESSION_KEY, new C3Manager());
-        }
-        manager = (C3Manager) externalContext.getSessionMap().get(C3Manager.SESSION_KEY);
+        Map<String, Object> sessionMap = Faces.getSessionMap(FacesContext.getCurrentInstance());
+        sessionMap.putIfAbsent(C3Manager.SESSION_KEY, new C3Manager());
+        manager = (C3Manager) sessionMap.get(C3Manager.SESSION_KEY);
     }
 
     @Override
@@ -113,8 +106,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
             return;
         }
 
-        ExternalContext external = context.getExternalContext();
-        Map<String, String> params = external.getRequestParameterMap();
+        Map<String, String> params = Faces.getRequestParameterMap(context);
         String behaviorEvent = params.get("javax.faces.behavior.event");
 
         if (behaviorEvent != null) {
@@ -130,7 +122,8 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
                 }
             }
         }
-        setSubmittedValue(context.getExternalContext().getRequestParameterMap().get(getClientId() + HIDDEN_NAME));
+
+        setSubmittedValue(params.get(getClientId() + HIDDEN_NAME));
     }
 
     // Encode phase -------------------------------------------------------------------------------------
@@ -139,36 +132,21 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
 
         assignDataWithListeners();
 
-        if (!context.getPartialViewContext()
-                .isAjaxRequest()) {
-            hiddenIndexHolder = (HtmlInputHidden) context.getApplication().createComponent(HtmlInputHidden.COMPONENT_TYPE);
-            hiddenIndexHolder.setId(getId() + HIDDEN_NAME);
-            this.getChildren().add(hiddenIndexHolder);
-            hiddenIndexHolder.encodeAll(context);
-
-            if (getChartType() != null) {
-                getComponentProperties().setChartType(getChartType());
-            }
-        } else {
-            hiddenIndexHolder = (HtmlInputHidden) context.getViewRoot().findComponent(getClientId() + HIDDEN_NAME);
-        }
-
         javaScriptVar = JSTools.jsName(getClientId());
         divId = getId() + DIV_APPENDER;
         List<Property> customProperties = getDefaultProperties();
 
         resolveFaceletProperties();
-        if (customProperties
-                != null) {
+        if (customProperties != null) {
             getComponentProperties().addProperties(customProperties);
         }
         String ajaxAction = getAjaxAction(context);
 
         String onclickScript = JSTools.semicolonSeparatedStatements("var event = 'click'",
-                "console.log(" + javaScriptVar + ".selected()); if (" + javaScriptVar + ".selected().length == 0) {"
-                + "$(\"input[name='" + hiddenIndexHolder.getClientId() + "']" + "\").attr('value', '');\n"
+                "if (" + javaScriptVar + ".selected().length == 0) {"
+                + "$(\"input[name='" + getClientId() + HIDDEN_NAME + "']" + "\").attr('value', '');\n"
                 + ajaxAction + "; } else {"
-                + "$(\"input[name='" + hiddenIndexHolder.getClientId() + "']" + "\").attr('value', d.id);\n"
+                + "$(\"input[name='" + getClientId() + HIDDEN_NAME + "']" + "\").attr('value', d.id);\n"
                 + ajaxAction
                 + "}");
 
@@ -176,60 +154,55 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
 
         ResponseWriter writer = context.getResponseWriter();
 
-        writer.startElement("script", this);
-        writer.writeAttribute("id", getClientId(), "id");
-
-        writer.endElement("script");
-
         writer.startElement("div", this);
-        writer.writeAttribute("id", getDivId(), "id");
+        writer.writeAttribute("id", getClientId(), "id");
+        writer.writeAttribute("name", getClientId(), "name");
         writer.writeAttribute("class", getCssClass(), "class");
         writer.writeAttribute("style", getStyle(), "style");
-        writer.endElement("div");
 
         super.encodeBegin(context);
     }
 
     @Override
     public void encodeEnd(FacesContext context) throws IOException {
+        boolean chartExists = Faces.getRequestParameterMap(context).containsKey(getClientId() + HIDDEN_NAME);
+        String newGeneratedScript = JSBuilder.build().var(javaScriptVar).c3().generate(getComponentProperties().getProperties()).endLine().getResult();
+        String lastGeneratedScript = getLastGeneratedScript();
 
-        if (!context.getPartialViewContext().isAjaxRequest()) {
-            ResponseWriter writer = context.getResponseWriter();
+        ResponseWriter writer = context.getResponseWriter();
 
-            writer.startElement("script", this);
-            writer.write(JSBuilder.build().var(javaScriptVar).c3().generate(getComponentProperties().getProperties()).endLine().getResult());
-            writer.endElement("script");
+        writer.startElement("script", this);
+        if (chartExists) {
+            System.out.println("Last generated script: " + lastGeneratedScript);
+            writer.write(lastGeneratedScript);
+        } else {
+            System.out.println("New generated script: " + newGeneratedScript);
+            writer.write(newGeneratedScript);
         }
+        writer.endElement("script");
+        writer.endElement("div");
+        writer.startElement("input", this);
+        writer.writeAttribute("type", "hidden", "type");
+        writer.writeAttribute("name", getClientId() + HIDDEN_NAME, "name");
+        writer.writeAttribute("value", "", "value");
+        writer.endElement("input");
 
-        if (context.getPartialViewContext().isAjaxRequest()) {
-            PartialResponseWriter pWriter = context.getPartialViewContext().getPartialResponseWriter();
-            if (!manager.isDataChanged()) {
-                pWriter.endUpdate();
-                pWriter.startEval();
-                pWriter.write(JSTools.semicolonSeparatedModifierScript(getComponentProperties().getPropertyModifiers(), javaScriptVar));
-                pWriter.endEval();
-                pWriter.startUpdate(getClientId());
-//                pWriter.endDocument();
-//                pWriter.flush();
-//                pWriter.close();
-                context.responseComplete();
-            } else {
-                pWriter.endUpdate();
-                pWriter.startEval();
-                pWriter.write(JSBuilder.build().var(javaScriptVar).c3().generate(getComponentProperties().getProperties()).endLine().getResult());
-                pWriter.endEval();
-                pWriter.startUpdate(getClientId());
-                context.responseComplete();
-            }
+        if (chartExists) {
+            String modificationScript = JSTools.semicolonSeparatedModifierScript(getComponentProperties().getPropertyModifiers(), javaScriptVar);
+            System.out.println("Modification script: " + modificationScript);
+            Faces.addCallbackScript(context, javaScriptVar + ".internal.loadConfig({\n"
+                    + "    transition: {\n"
+                    + "        duration: 350\n"
+                    + "    }\n"
+                    + "});");
+            Faces.addCallbackScript(context, modificationScript);
         }
-        getComponentProperties().resetListeners();
+        setLastGeneratedScript(newGeneratedScript);
     }
 
     @Override
     protected Object getConvertedValue(FacesContext context, Object newSubmittedValue) throws ConverterException {
-
         assignDataWithListeners();
-
         String uuid = (String) context.getExternalContext().getRequestParameterMap().get(getClientId() + HIDDEN_NAME);
         if (data != null) {
             return data.getDataSetById(uuid);
@@ -269,39 +242,16 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     }
 
     private void addDefaultProperties(String onClickScript) {
-        String typeOnclick = "jsfOnunselectScript";
-//        getComponentProperties().getComponentData().removeChildrenByType(type);
-
         OnclickMethod onClickMethod = new OnclickMethod(onClickScript, "d", "i");
         getComponentProperties().getComponentData().addChild(onClickMethod);
 
         Bindto bindto = (Bindto) getComponentProperties().getProperty("bindto");
         if (bindto != null) {
-            bindto.setBody("#" + divId);
+            bindto.setBody("#" + JSTools.colonAid(getClientId()));
         } else {
-            getComponentProperties().addProperty(new Bindto("#" + divId));
+            getComponentProperties().addProperty(new Bindto("#" + JSTools.colonAid(getClientId())));
         }
-    }
-
-    /**
-     * Return specified attribute value or default if it's null
-     */
-    @SuppressWarnings("unchecked")
-    private <T> T
-            getAttributeValue(String key, T defaultValue
-            ) {
-        T value = (T) getAttributes().get(key);
-        return (value != null) ? value : defaultValue;
-    }
-
-    private Integer assignValue(String facelet, Integer val2, Integer def) {
-        if (getAttributes().get(facelet) != null) {
-            return Integer.parseInt((String) getAttributes().get(facelet));
-        }
-        if (val2 != null) {
-            return val2;
-        }
-        return def;
+        getComponentProperties().addProperty(new Transition(0));
     }
 
     private void assignDataWithListeners() {
@@ -310,6 +260,10 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
         } else {
             data = new Data();
         }
+        if (data.getChartType() == null && getChartType() != null) {
+            data.setChartType(getChartType());
+        }
+
         manager.addData(getClientId(), data);
 
         if (manager.isDataChanged()) {
@@ -357,5 +311,17 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
             setComponentProperties(componentProperties);
         }
         return (ComponentProperties) getStateHelper().get(PropertyKeys.componentProperties);
+    }
+
+    public void setLastGeneratedScript(String style) {
+        getStateHelper().put(PropertyKeys.lastGeneratedScript, style);
+    }
+
+    public String getLastGeneratedScript() {
+        return (String) getStateHelper().get(PropertyKeys.lastGeneratedScript);
+    }
+
+    public void resetState() {
+        getComponentProperties().resetListeners();
     }
 }

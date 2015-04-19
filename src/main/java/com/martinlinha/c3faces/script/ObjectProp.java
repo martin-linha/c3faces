@@ -2,7 +2,6 @@ package com.martinlinha.c3faces.script;
 
 import com.martinlinha.c3faces.listener.ChangeListener;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -27,12 +26,12 @@ public class ObjectProp extends Property {
     }
 
     public ObjectProp(Property... properties) {
-        setChildren(new HashSet(Arrays.asList(properties)));
+        addChildren(Arrays.asList(properties));
     }
 
     public ObjectProp(String name, Property... properties) {
         setName(name);
-        setChildren(new HashSet(Arrays.asList(properties)));
+        addChildren(Arrays.asList(properties));
     }
 
     public ObjectProp(String body) {

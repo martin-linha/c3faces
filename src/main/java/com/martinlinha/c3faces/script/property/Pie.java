@@ -24,13 +24,8 @@ public class Pie extends ObjectProp {
 
     @Override
     protected void preScriptBuild() {
-        if (expand != null) {
-            addChild(new ValueProp("expand", expand));
-        }
-
-        if (showLabels != null) {
-            addChild(new ObjectProp("label", new ValueProp("show", showLabels)));
-        }
+        addChild(new ValueProp("expand", expand));
+        addChild(new ObjectProp("label", new ValueProp("show", showLabels)));
     }
 
     @Override

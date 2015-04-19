@@ -4,9 +4,8 @@ import com.martinlinha.c3faces.listener.ChangeListener;
 import com.martinlinha.c3faces.listener.change.Change;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -17,8 +16,7 @@ public abstract class Property {
     private String name;
     private String body;
     private List<ChangeListener> listeners = new ArrayList<>();
-    private Set<Property> children = new HashSet<>();
-    private boolean childrenAppended;
+    private final List<Property> children = new ArrayList<>();
 
     public Property() {
     }
@@ -28,14 +26,11 @@ public abstract class Property {
     }
 
     public final String getScript() {
-        return this.getScript(true);
+        return getScript(true);
     }
 
     public final String getScript(boolean includeName) {
-        if (!childrenAppended) {
-            preScriptBuild();
-            childrenAppended = true;
-        }
+        preScriptBuild();
 
         final StringBuilder sb = new StringBuilder();
         String propName = includeName ? getName() : null;
@@ -77,12 +72,8 @@ public abstract class Property {
 
     public abstract String getSuffix();
 
-    public Set<Property> getChildren() {
+    public List<Property> getChildren() {
         return children;
-    }
-
-    public void setChildren(Set<Property> children) {
-        this.children = children;
     }
 
     public String getName() {
@@ -102,10 +93,21 @@ public abstract class Property {
     }
 
     public void addChild(Property property) {
-        if ((property.getBody() == null || property.getBody().isEmpty()) && property.getChildren().isEmpty()) {
+        if (property == null) {
             return;
         }
-        getChildren().add(property);
+
+        removeDuplicate(property);
+
+        if (containsSomeBody(property)) {
+            children.add(property);
+        }
+    }
+
+    public void addChildren(Collection<Property> properties) {
+        for (Property property : properties) {
+            addChild(property);
+        }
     }
 
     public void fire(String name, Object value) {
@@ -132,5 +134,28 @@ public abstract class Property {
 
     public void addListeners(Collection<ChangeListener> listener) {
         listeners.addAll(listener);
+    }
+
+    private boolean containsSomeBody(Property property) {
+        if (property.getBody() != null && !property.getBody().isEmpty()) {
+            return true;
+        } else {
+            for (Property child : property.getChildren()) {
+                if (containsSomeBody(child)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void removeDuplicate(Property property) {
+        Iterator<Property> i = children.iterator();
+        while (i.hasNext()) {
+            Property s = i.next();
+            if (s.getName() != null && s.getName().equals(property.getName())) {
+                i.remove();
+            }
+        }
     }
 }

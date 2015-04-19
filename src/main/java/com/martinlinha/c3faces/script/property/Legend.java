@@ -51,61 +51,47 @@ public class Legend extends ObjectProp {
 
     @Override
     protected void preScriptBuild() {
+        String positionString = "";
+        String anchorString = "";
         if (position != null) {
-            addChild(new ValueProp("position", position.name().toLowerCase(), true));
+            positionString = position.name().toLowerCase();
         }
-        if (show != null) {
-            addChild(new ValueProp("show", show));
+        if (insetAnchor != null) {
+            switch (insetAnchor) {
+                case BOTTOMLEFT:
+                    anchorString = "bottom-left";
+                    break;
+                case BOTTOMRIGHT:
+                    anchorString = "bottom-right";
+                    break;
+                case TOPLEFT:
+                    anchorString = "top-left";
+                    break;
+                case TOPRIGHT:
+                    anchorString = "top-right";
+                    break;
+            }
         }
-        if (hide != null) {
-            addChild(new ValueProp("hide", hide));
-        }
-        if (insetAnchor != null || insetX != null || insetY != null || insetStep != null) {
-            ObjectProp obj = new ObjectProp();
-            obj.setName("inset");
 
-            if (insetAnchor != null) {
-                switch (insetAnchor) {
-                    case BOTTOMLEFT:
-                        obj.addChild(new ValueProp("anchor", "bottom-left", true));
-                        break;
-                    case BOTTOMRIGHT:
-                        obj.addChild(new ValueProp("anchor", "bottom-right", true));
-                        break;
-                    case TOPLEFT:
-                        obj.addChild(new ValueProp("anchor", "top-left", true));
-                        break;
-                    case TOPRIGHT:
-                        obj.addChild(new ValueProp("anchor", "top-right", true));
-                        break;
-                }
-            }
-            if (insetX != null) {
-                obj.addChild(new ValueProp("x", insetX));
-            }
-            if (insetY != null) {
-                obj.addChild(new ValueProp("y", insetY));
-            }
-            if (insetStep != null) {
-                obj.addChild(new ValueProp("step", insetStep));
-            }
-            addChild(obj);
-        }
-        if (itemOnclick != null || itemOnmouseout != null || itemOnmouseover != null) {
-            ObjectProp obj = new ObjectProp();
-            obj.setName("item");
+        addChild(new ValueProp("position", positionString, true));
+        addChild(new ValueProp("show", show));
+        addChild(new ValueProp("hide", hide));
 
-            if (itemOnclick != null) {
-                obj.addChild(itemOnclick);
-            }
-            if (itemOnmouseout != null) {
-                obj.addChild(itemOnmouseout);
-            }
-            if (itemOnmouseover != null) {
-                obj.addChild(itemOnmouseover);
-            }
-            addChild(obj);
-        }
+        ObjectProp obj = new ObjectProp();
+        obj.setName("inset");
+        obj.addChild(new ValueProp("anchor", anchorString, true));
+        obj.addChild(new ValueProp("x", insetX));
+        obj.addChild(new ValueProp("y", insetY));
+        obj.addChild(new ValueProp("step", insetStep));
+        addChild(obj);
+
+        ObjectProp item = new ObjectProp();
+        item.setName("item");
+
+        item.addChild(itemOnclick);
+        item.addChild(itemOnmouseout);
+        item.addChild(itemOnmouseover);
+        addChild(item);
     }
 
     @Override

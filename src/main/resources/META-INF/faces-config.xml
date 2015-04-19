@@ -4,5 +4,11 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
+    <lifecycle>
+        <phase-listener>com.martinlinha.c3faces.jsf.RenderPhaseListener</phase-listener>
+    </lifecycle>
     
+    <factory>
+        <partial-view-context-factory>com.martinlinha.c3faces.jsf.C3PartialViewContextFactory</partial-view-context-factory>
+    </factory>
 </faces-config>

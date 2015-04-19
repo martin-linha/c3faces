@@ -37,4 +37,20 @@ public class BarProperties extends ObjectProp {
     public String getName() {
         return NAME;
     }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public Boolean getZerobased() {
+        return zerobased;
+    }
+
+    public void setZerobased(Boolean zerobased) {
+        this.zerobased = zerobased;
+    }
 }

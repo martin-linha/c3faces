@@ -32,42 +32,34 @@ public class GridProperties extends ObjectProp {
 
     @Override
     protected void preScriptBuild() {
-        if (showX != null) {
-            addChild(new ObjectProp("x", new ValueProp("show", showX)));
-        }
+        addChild(new ObjectProp("x", new ValueProp("show", showX)));
+        addChild(new ObjectProp("y", new ValueProp("show", showY)));
 
-        if (showY != null) {
-            addChild(new ObjectProp("y", new ValueProp("show", showY)));
+        ObjectProp xGrids = new ObjectProp();
+        xGrids.setName("x");
+        ArrayProp xLines = new ArrayProp();
+        xLines.setName("lines");
+        for (Entry entry : additionalXLines.entrySet()) {
+            xLines.addChild(
+                    new ObjectProp(
+                            new ValueProp("value", (Double) entry.getKey()),
+                            new ValueProp("text", (String) entry.getValue(), true)));
         }
+        xGrids.addChild(xLines);
+        addChild(xGrids);
 
-        if (additionalXLines != null) {
-            ObjectProp wrapper = new ObjectProp();
-            wrapper.setName("x");
-            ArrayProp linesArray = new ArrayProp();
-            linesArray.setName("lines");
-            for (Entry entry : additionalXLines.entrySet()) {
-                linesArray.addChild(
-                        new ObjectProp(
-                                new ValueProp("value", (Double) entry.getKey()),
-                                new ValueProp("text", (String) entry.getValue(), true)));
-            }
-            wrapper.addChild(linesArray);
-            addChild(wrapper);
+        ObjectProp wrapper = new ObjectProp();
+        wrapper.setName("y");
+        ArrayProp linesArray = new ArrayProp();
+        linesArray.setName("lines");
+        for (Entry entry : additionalYLines.entrySet()) {
+            linesArray.addChild(
+                    new ObjectProp(
+                            new ValueProp("value", (Double) entry.getKey()),
+                            new ValueProp("text", (String) entry.getValue(), true)));
         }
-        if (additionalYLines != null) {
-            ObjectProp wrapper = new ObjectProp();
-            wrapper.setName("y");
-            ArrayProp linesArray = new ArrayProp();
-            linesArray.setName("lines");
-            for (Entry entry : additionalYLines.entrySet()) {
-                linesArray.addChild(
-                        new ObjectProp(
-                                new ValueProp("value", (Double) entry.getKey()),
-                                new ValueProp("text", (String) entry.getValue(), true)));
-            }
-            wrapper.addChild(linesArray);
-            addChild(wrapper);
-        }
+        wrapper.addChild(linesArray);
+        addChild(wrapper);
     }
 
     @Override
