@@ -40,8 +40,7 @@ import javax.faces.convert.ConverterException;
     @ResourceDependency(library = "c3faces", name = "d3.min.js"),
     @ResourceDependency(library = "c3faces", name = "d3.js"),
     @ResourceDependency(library = "c3faces", name = "c3.min.js"),
-    @ResourceDependency(library = "c3faces", name = "c3.css"),
-    @ResourceDependency(library = "c3faces", name = "jquery-2.1.3.min.js")
+    @ResourceDependency(library = "c3faces", name = "c3.css")
 })
 
 public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
@@ -144,9 +143,9 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
 
         String onclickScript = JSTools.semicolonSeparatedStatements("var event = 'click'",
                 "if (" + javaScriptVar + ".selected().length == 0) {"
-                + "$(\"input[name='" + getClientId() + HIDDEN_NAME + "']" + "\").attr('value', '');\n"
+                + "document.getElementsByName('" + getClientId() + HIDDEN_NAME + "')[0].value = '';\n"
                 + ajaxAction + "; } else {"
-                + "$(\"input[name='" + getClientId() + HIDDEN_NAME + "']" + "\").attr('value', d.id);\n"
+                + "document.getElementsByName('" + getClientId() + HIDDEN_NAME + "')[0].value = d.id;\n"
                 + ajaxAction
                 + "}");
 
