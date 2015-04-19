@@ -1,7 +1,7 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
@@ -29,12 +29,12 @@ public class GaugeProperties extends Pie {
 
     @Override
     protected void preScriptBuild() {
-        addChild(new ValueProp("width", width));
-        addChild(new ValueProp("min", min));
-        addChild(new ValueProp("max", max));
-        addChild(new ValueProp("units", units, true));
-        addChild(new ValueProp("expand", super.getExpand()));
-        addChild(new ObjectProp("label", new ValueProp("show", super.getShowLabels())));
+        addChild(new ValueBlock("width", width));
+        addChild(new ValueBlock("min", min));
+        addChild(new ValueBlock("max", max));
+        addChild(new ValueBlock("units", units, true));
+        addChild(new ValueBlock("expand", super.getExpand()));
+        addChild(new ObjectBlock("label", new ValueBlock("show", super.getShowLabels())));
     }
 
     @Override

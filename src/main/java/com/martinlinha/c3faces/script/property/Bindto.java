@@ -1,12 +1,12 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class Bindto extends ValueProp {
+public class Bindto extends ValueBlock {
 
     public static String NAME = "bindto";
 

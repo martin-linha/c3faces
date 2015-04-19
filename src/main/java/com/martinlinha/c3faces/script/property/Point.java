@@ -1,13 +1,13 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class Point extends ObjectProp {
+public class Point extends ObjectBlock {
     
     public static String NAME = "point";
 
@@ -31,19 +31,19 @@ public class Point extends ObjectProp {
     @Override
     public void preScriptBuild() {
         if (show != null) {
-            addChild(new ValueProp("show", show));
+            addChild(new ValueBlock("show", show));
         }
         if (r != null) {
-            addChild(new ValueProp("r", r));
+            addChild(new ValueBlock("r", r));
         }
         if (expand != null) {
-            addChild(new ObjectProp("focus", new ObjectProp("expand", new ValueProp("enabled", expand))));
+            addChild(new ObjectBlock("focus", new ObjectBlock("expand", new ValueBlock("enabled", expand))));
         }
         if (expandR != null) {
-            addChild(new ObjectProp("focus", new ObjectProp("expand", new ValueProp("r", expandR))));
+            addChild(new ObjectBlock("focus", new ObjectBlock("expand", new ValueBlock("r", expandR))));
         }
         if (selectR != null) {
-            addChild(new ObjectProp("select", new ValueProp("r", selectR)));
+            addChild(new ObjectBlock("select", new ValueBlock("r", selectR)));
         }
     }
 

@@ -1,15 +1,15 @@
 package com.martinlinha.c3faces.script.property;
 
 import com.martinlinha.c3faces.listener.ChangeListener;
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 import java.util.Arrays;
 
 /**
  *
  * @author Martin Linha
  */
-public class Size extends ObjectProp {
+public class Size extends ObjectBlock {
 
     public static String NAME = "size";
 
@@ -28,10 +28,10 @@ public class Size extends ObjectProp {
     @Override
     protected void preScriptBuild() {
         if (width != null) {
-            addChild(new ValueProp("width", width));
+            addChild(new ValueBlock("width", width));
         }
         if (height != null) {
-            addChild(new ValueProp("height", height));
+            addChild(new ValueBlock("height", height));
         }
     }
 

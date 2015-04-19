@@ -6,25 +6,25 @@ import java.util.Arrays;
  *
  * @author Martin Linha
  */
-public class ArrayProp extends Property {
+public class ArrayBlock extends Property {
     
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
     
-    public ArrayProp() {
+    public ArrayBlock() {
     }
     
-    public ArrayProp(String name, String body) {
+    public ArrayBlock(String name, String body) {
         setName(name);
         setBody(body);
     }
     
-    public ArrayProp(String name, Property... properties) {
+    public ArrayBlock(String name, Property... properties) {
         setName(name);
         addChildren(Arrays.asList(properties));
     }
     
-    public ArrayProp(String body) {
+    public ArrayBlock(String body) {
         setBody(body);
     }
     

@@ -4,9 +4,9 @@ package com.martinlinha.c3faces.script;
  *
  * @author Martin Linha
  */
-public class CommaValueProp extends ValueProp {
+public class CommaValueBlock extends ValueBlock {
 
-    public CommaValueProp(String name, String body, boolean bodyQuoted, boolean nameQuoted) {
+    public CommaValueBlock(String name, String body, boolean bodyQuoted, boolean nameQuoted) {
         super(name, body, bodyQuoted, nameQuoted);
     }
 

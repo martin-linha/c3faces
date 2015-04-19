@@ -2,7 +2,7 @@ package com.martinlinha.c3faces.script.modifier;
 
 import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.constants.ChartType;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.script.Property;
 
 /**
@@ -20,7 +20,7 @@ public class Transform extends Modifier {
             chartType = ((ChartType) getPropertyLastChange("chartType")).getName();
         }
 
-        return new ValueProp(null, chartType, true);
+        return new ValueBlock(null, chartType, true);
     }
 
     @Override

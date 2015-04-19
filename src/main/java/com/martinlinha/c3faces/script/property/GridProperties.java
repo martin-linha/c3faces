@@ -1,8 +1,8 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ArrayProp;
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ArrayBlock;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Martin Linha
  */
-public class GridProperties extends ObjectProp {
+public class GridProperties extends ObjectBlock {
 
     public static String NAME = "grid";
 
@@ -28,28 +28,26 @@ public class GridProperties extends ObjectProp {
     @Override
     protected void preScriptBuild() {
 
-        ObjectProp xGrids = new ObjectProp();
+        ObjectBlock xGrids = new ObjectBlock();
         xGrids.setName("x");
-        ArrayProp xLines = new ArrayProp();
+        ArrayBlock xLines = new ArrayBlock();
         xLines.setName("lines");
         for (Grid grid : additionalXLines) {
-            xLines.addChild(
-                    new ObjectProp(
-                            new ValueProp("value", grid.getValue()),
-                            new ValueProp("text", grid.getText(), true)));
+            xLines.addChild(new ObjectBlock(
+                            new ValueBlock("value", grid.getValue()),
+                            new ValueBlock("text", grid.getText(), true)));
         }
         xGrids.addChild(xLines);
         addChild(xGrids);
 
-        ObjectProp wrapper = new ObjectProp();
+        ObjectBlock wrapper = new ObjectBlock();
         wrapper.setName("y");
-        ArrayProp linesArray = new ArrayProp();
+        ArrayBlock linesArray = new ArrayBlock();
         linesArray.setName("lines");
         for (Grid grid : additionalYLines) {
-            linesArray.addChild(
-                    new ObjectProp(
-                            new ValueProp("value", grid.getValue()),
-                            new ValueProp("text", grid.getText(), true)));
+            linesArray.addChild(new ObjectBlock(
+                            new ValueBlock("value", grid.getValue()),
+                            new ValueBlock("text", grid.getText(), true)));
         }
         wrapper.addChild(linesArray);
         addChild(wrapper);

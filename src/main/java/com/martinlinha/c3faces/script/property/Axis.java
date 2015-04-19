@@ -1,8 +1,8 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ArrayProp;
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ArrayBlock;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.util.JSTools;
 import java.util.Set;
 
@@ -10,7 +10,7 @@ import java.util.Set;
  *
  * @author Martin Linha
  */
-public class Axis extends ObjectProp {
+public class Axis extends ObjectBlock {
 
     public static String NAME = "axis";
 
@@ -51,49 +51,49 @@ public class Axis extends ObjectProp {
     @Override
     protected void preScriptBuild() {
         if (rotated != null) {
-            addChild(new ValueProp("rotated", rotated));
+            addChild(new ValueBlock("rotated", rotated));
         }
 
         if (showX != null || typeX != null || categoriesX != null || localtimeX != null) {
-            ObjectProp obj = new ObjectProp();
+            ObjectBlock obj = new ObjectBlock();
             obj.setName("x");
 
             if (showX != null) {
-                obj.addChild(new ValueProp("show", showX));
+                obj.addChild(new ValueBlock("show", showX));
             }
             if (typeX != null) {
-                obj.addChild(new ValueProp("type", typeX.name().toLowerCase()));
+                obj.addChild(new ValueBlock("type", typeX.name().toLowerCase()));
             }
             if (categoriesX != null) {
-                obj.addChild(new ArrayProp("categories", JSTools.commaSeparatedStringsQuoted(categoriesX)));
+                obj.addChild(new ArrayBlock("categories", JSTools.commaSeparatedStringsQuoted(categoriesX)));
             }
             if (localtimeX != null) {
-                obj.addChild(new ValueProp("localtime", localtimeX));
+                obj.addChild(new ValueBlock("localtime", localtimeX));
             }
             if (heightX != null) {
-                obj.addChild(new ValueProp("height", heightX));
+                obj.addChild(new ValueBlock("height", heightX));
             }
             addChild(obj);
         }
 
         if (showY != null || typeY != null || categoriesY != null || localtimeY != null) {
-            ObjectProp obj = new ObjectProp();
+            ObjectBlock obj = new ObjectBlock();
             obj.setName("y");
 
             if (showY != null) {
-                obj.addChild(new ValueProp("show", showY));
+                obj.addChild(new ValueBlock("show", showY));
             }
             if (typeY != null) {
-                obj.addChild(new ValueProp("type", typeY.name().toLowerCase()));
+                obj.addChild(new ValueBlock("type", typeY.name().toLowerCase()));
             }
             if (categoriesY != null) {
-                obj.addChild(new ArrayProp("categories", JSTools.commaSeparatedStringsQuoted(categoriesY)));
+                obj.addChild(new ArrayBlock("categories", JSTools.commaSeparatedStringsQuoted(categoriesY)));
             }
             if (localtimeY != null) {
-                obj.addChild(new ValueProp("localtime", localtimeY));
+                obj.addChild(new ValueBlock("localtime", localtimeY));
             }
             if (heightY != null) {
-                obj.addChild(new ValueProp("height", heightY));
+                obj.addChild(new ValueBlock("height", heightY));
             }
             addChild(obj);
         }

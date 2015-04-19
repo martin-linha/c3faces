@@ -2,9 +2,9 @@ package com.martinlinha.c3faces.script.property;
 
 import com.martinlinha.c3faces.constants.ChartType;
 import com.martinlinha.c3faces.model.C3ViewDataSet;
-import com.martinlinha.c3faces.script.ArrayProp;
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ArrayBlock;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.listener.C3ViewDataObservableSet;
 import com.martinlinha.c3faces.util.JSTools;
 import java.util.HashSet;
@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * @author Martin Linha
  */
-public class Data extends ObjectProp {
+public class Data extends ObjectBlock {
 
     public static String NAME = "data";
 
@@ -32,27 +32,27 @@ public class Data extends ObjectProp {
     @Override
     protected void preScriptBuild() {
         if (dataSetsObserver != null && !dataSetsObserver.isEmpty()) {
-            addChild(new ValueProp("columns", new ArrayProp(JSTools.columns(dataSetsObserver))));
+            addChild(new ValueBlock("columns", new ArrayBlock(JSTools.columns(dataSetsObserver))));
         } else {
-            addChild(new ValueProp("columns", new ArrayProp(" ")));
+            addChild(new ValueBlock("columns", new ArrayBlock(" ")));
         }
 
         if (dataSetsObserver != null && !dataSetsObserver.isEmpty()) {
-            ObjectProp namesObj = new ObjectProp();
-            ObjectProp colorsObj = new ObjectProp();
+            ObjectBlock namesObj = new ObjectBlock();
+            ObjectBlock colorsObj = new ObjectBlock();
             namesObj.setName("names");
             colorsObj.setName("colors");
             for (C3ViewDataSet data : dataSetsObserver) {
-                namesObj.addChild(new ValueProp(data.getId(), data.getName(), true));
-                colorsObj.addChild(new ValueProp(data.getId(), data.getColor(), true));
+                namesObj.addChild(new ValueBlock(data.getId(), data.getName(), true));
+                colorsObj.addChild(new ValueBlock(data.getId(), data.getColor(), true));
             }
             addChild(namesObj);
             addChild(colorsObj);
             if (chartType != null) {
-                addChild(new ValueProp("type", chartType.getName(), true));
+                addChild(new ValueBlock("type", chartType.getName(), true));
             }
             if (isSelection()) {
-                addChild(new ObjectProp("selection", new ValueProp("enabled", selection), new ValueProp("multiple", false)));
+                addChild(new ObjectBlock("selection", new ValueBlock("enabled", selection), new ValueBlock("multiple", false)));
             }
         }
     }

@@ -8,33 +8,33 @@ import java.util.List;
  *
  * @author Martin Linha
  */
-public class ObjectProp extends Property {
+public class ObjectBlock extends Property {
 
     private static final String PREFIX = "{";
     private static final String SUFFIX = "}";
 
-    public ObjectProp() {
+    public ObjectBlock() {
     }
 
-    public ObjectProp(List<ChangeListener> listeners) {
+    public ObjectBlock(List<ChangeListener> listeners) {
         super(listeners);
     }
 
-    public ObjectProp(String name, String body) {
+    public ObjectBlock(String name, String body) {
         setName(name);
         setBody(body);
     }
 
-    public ObjectProp(Property... properties) {
+    public ObjectBlock(Property... properties) {
         addChildren(Arrays.asList(properties));
     }
 
-    public ObjectProp(String name, Property... properties) {
+    public ObjectBlock(String name, Property... properties) {
         setName(name);
         addChildren(Arrays.asList(properties));
     }
 
-    public ObjectProp(String body) {
+    public ObjectBlock(String body) {
         setBody(body);
     }
 

@@ -1,10 +1,10 @@
 package com.martinlinha.c3faces.script.modifier;
 
-import com.martinlinha.c3faces.script.ArrayProp;
+import com.martinlinha.c3faces.script.ArrayBlock;
 import com.martinlinha.c3faces.script.Modifier;
-import com.martinlinha.c3faces.script.ObjectProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.Property;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.script.property.Grid;
 import java.util.Arrays;
 import java.util.List;
@@ -28,15 +28,15 @@ public class YGridAdd extends Modifier {
 
     @Override
     protected Property getModificationProperty() {
-        ArrayProp ygridArray = new ArrayProp();
+        ArrayBlock ygridArray = new ArrayBlock();
 
         Set<Grid> grids = (Set<Grid>) getPropertyChangeSet("yGridAdd");
         if (grids != null) {
 
             for (Grid grid : grids) {
-                ObjectProp obj = new ObjectProp();
-                obj.addChild(new ValueProp("value", grid.getValue()));
-                obj.addChild(new ValueProp("text", grid.getText(), true));
+                ObjectBlock obj = new ObjectBlock();
+                obj.addChild(new ValueBlock("value", grid.getValue()));
+                obj.addChild(new ValueBlock("text", grid.getText(), true));
                 ygridArray.addChild(obj);
             }
         }

@@ -2,7 +2,7 @@ package com.martinlinha.c3faces.script.modifier;
 
 import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.constants.ChartType;
-import com.martinlinha.c3faces.script.CommaValueProp;
+import com.martinlinha.c3faces.script.CommaValueBlock;
 import com.martinlinha.c3faces.script.Property;
 
 /**
@@ -22,7 +22,7 @@ public class TransformType extends Modifier {
     @Override
     protected Property getModificationProperty() {
         String type = chartType != null ? chartType.getName() : null;
-        return new CommaValueProp(type, id, true, true);
+        return new CommaValueBlock(type, id, true, true);
     }
 
     @Override

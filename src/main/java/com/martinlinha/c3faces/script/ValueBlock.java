@@ -6,60 +6,60 @@ import java.util.Arrays;
  *
  * @author Martin Linha
  */
-public class ValueProp extends Property {
+public class ValueBlock extends Property {
 
     private static final String PREFIX = "";
     private static final String SUFFIX = "";
     private boolean bodyQuoted;
     private boolean nameQuoted;
 
-    public ValueProp() {
+    public ValueBlock() {
     }
 
-    public ValueProp(String name, String body) {
+    public ValueBlock(String name, String body) {
         setName(name);
         setBody(body);
     }
 
-    public ValueProp(String name, Integer val) {
+    public ValueBlock(String name, Integer val) {
         setName(name);
         if (val != null) {
             setBody(val.toString());
         }
     }
 
-    public ValueProp(String name, Boolean val) {
+    public ValueBlock(String name, Boolean val) {
         setName(name);
         if (val != null) {
             setBody(val.toString());
         }
     }
 
-    public ValueProp(String name, Double val) {
+    public ValueBlock(String name, Double val) {
         setName(name);
         if (val != null) {
             setBody(val.toString());
         }
     }
 
-    public ValueProp(String name, String body, boolean bodyQuoted) {
+    public ValueBlock(String name, String body, boolean bodyQuoted) {
         setName(name);
         setBody(body);
         this.bodyQuoted = bodyQuoted;
     }
 
-    public ValueProp(String name, String body, boolean bodyQuoted, boolean nameQuoted) {
+    public ValueBlock(String name, String body, boolean bodyQuoted, boolean nameQuoted) {
         setName(name);
         setBody(body);
         this.bodyQuoted = bodyQuoted;
         this.nameQuoted = nameQuoted;
     }
 
-    public ValueProp(String body) {
+    public ValueBlock(String body) {
         setBody(body);
     }
 
-    public ValueProp(String name, Property... properties) {
+    public ValueBlock(String name, Property... properties) {
         setName(name);
         addChildren(Arrays.asList(properties));
     }

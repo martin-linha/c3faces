@@ -1,13 +1,13 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class Subchart extends ObjectProp {
+public class Subchart extends ObjectBlock {
 
     public static String NAME = "subchart";
 
@@ -27,10 +27,10 @@ public class Subchart extends ObjectProp {
     @Override
     protected void preScriptBuild() {
         if (show != null) {
-            addChild(new ValueProp("show", show));
+            addChild(new ValueBlock("show", show));
         }
         if (height != null) {
-            addChild(new ObjectProp("size", new ValueProp("height", height)));
+            addChild(new ObjectBlock("size", new ValueBlock("height", height)));
         }
         if (onbrushMethodProp != null) {
             addChild(onbrushMethodProp);

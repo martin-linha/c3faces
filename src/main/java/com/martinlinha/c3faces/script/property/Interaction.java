@@ -1,13 +1,13 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class Interaction extends ObjectProp {
+public class Interaction extends ObjectBlock {
 
     public static String NAME = "interaction";
 
@@ -23,7 +23,7 @@ public class Interaction extends ObjectProp {
     @Override
     protected void preScriptBuild() {
         if (enabled != null) {
-            addChild(new ValueProp("enabled", enabled));
+            addChild(new ValueBlock("enabled", enabled));
         }
     }
 

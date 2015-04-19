@@ -1,12 +1,12 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.MethodProp;
+import com.martinlinha.c3faces.script.MethodBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class OnclickMethod extends MethodProp {
+public class OnclickMethod extends MethodBlock {
 
     public OnclickMethod(String body, String... params) {
         super(body, params);

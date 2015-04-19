@@ -1,11 +1,11 @@
 package com.martinlinha.c3faces.script.property;
 
 import com.martinlinha.c3faces.listener.ChangeListener;
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 import java.util.Arrays;
 
-public class Legend extends ObjectProp {
+public class Legend extends ObjectBlock {
 
     public static String NAME = "legend";
 
@@ -73,19 +73,19 @@ public class Legend extends ObjectProp {
             }
         }
 
-        addChild(new ValueProp("position", positionString, true));
-        addChild(new ValueProp("show", show));
-        addChild(new ValueProp("hide", hide));
+        addChild(new ValueBlock("position", positionString, true));
+        addChild(new ValueBlock("show", show));
+        addChild(new ValueBlock("hide", hide));
 
-        ObjectProp obj = new ObjectProp();
+        ObjectBlock obj = new ObjectBlock();
         obj.setName("inset");
-        obj.addChild(new ValueProp("anchor", anchorString, true));
-        obj.addChild(new ValueProp("x", insetX));
-        obj.addChild(new ValueProp("y", insetY));
-        obj.addChild(new ValueProp("step", insetStep));
+        obj.addChild(new ValueBlock("anchor", anchorString, true));
+        obj.addChild(new ValueBlock("x", insetX));
+        obj.addChild(new ValueBlock("y", insetY));
+        obj.addChild(new ValueBlock("step", insetStep));
         addChild(obj);
 
-        ObjectProp item = new ObjectProp();
+        ObjectBlock item = new ObjectBlock();
         item.setName("item");
 
         item.addChild(itemOnclick);

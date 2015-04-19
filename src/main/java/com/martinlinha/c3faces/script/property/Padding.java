@@ -1,13 +1,13 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class Padding extends ObjectProp {
+public class Padding extends ObjectBlock {
 
     public static String NAME = "padding";
 
@@ -29,16 +29,16 @@ public class Padding extends ObjectProp {
     @Override
     protected void preScriptBuild() {
         if (top != null) {
-            addChild(new ValueProp("top", top));
+            addChild(new ValueBlock("top", top));
         }
         if (right != null) {
-            addChild(new ValueProp("right", right));
+            addChild(new ValueBlock("right", right));
         }
         if (left != null) {
-            addChild(new ValueProp("left", left));
+            addChild(new ValueBlock("left", left));
         }
         if (bottom != null) {
-            addChild(new ValueProp("bottom", bottom));
+            addChild(new ValueBlock("bottom", bottom));
         }
     }
 

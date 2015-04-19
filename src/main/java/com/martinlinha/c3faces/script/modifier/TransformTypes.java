@@ -4,7 +4,7 @@ import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.constants.ChartType;
 import com.martinlinha.c3faces.listener.change.Change;
 import com.martinlinha.c3faces.listener.change.ViewDataSetChange;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.script.Property;
 
 /**
@@ -24,7 +24,7 @@ public class TransformTypes extends Modifier {
                 }
             }
         }
-        return new ValueProp();
+        return new ValueBlock();
     }
 
     @Override

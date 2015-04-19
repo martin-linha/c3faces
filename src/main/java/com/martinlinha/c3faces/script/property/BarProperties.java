@@ -1,13 +1,13 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class BarProperties extends ObjectProp {
+public class BarProperties extends ObjectBlock {
 
     public static String NAME = "bar";
 
@@ -25,11 +25,11 @@ public class BarProperties extends ObjectProp {
     @Override
     protected void preScriptBuild() {
         if (width != null) {
-            addChild(new ValueProp("width", width));
+            addChild(new ValueBlock("width", width));
         }
 
         if (zerobased != null) {
-            addChild(new ValueProp("zerobased", zerobased));
+            addChild(new ValueBlock("zerobased", zerobased));
         }
     }
 

@@ -1,13 +1,13 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class Pie extends ObjectProp {
+public class Pie extends ObjectBlock {
 
     public static String NAME = "pie";
 
@@ -24,8 +24,8 @@ public class Pie extends ObjectProp {
 
     @Override
     protected void preScriptBuild() {
-        addChild(new ValueProp("expand", expand));
-        addChild(new ObjectProp("label", new ValueProp("show", showLabels)));
+        addChild(new ValueBlock("expand", expand));
+        addChild(new ObjectBlock("label", new ValueBlock("show", showLabels)));
     }
 
     @Override

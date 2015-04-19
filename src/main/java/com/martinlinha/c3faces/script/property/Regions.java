@@ -1,8 +1,8 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ArrayProp;
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ArrayBlock;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Martin Linha
  */
-public class Regions extends ValueProp {
+public class Regions extends ValueBlock {
 
     public static String NAME = "regions";
 
@@ -26,13 +26,13 @@ public class Regions extends ValueProp {
     @Override
     protected void preScriptBuild() {
         if (regions != null && !regions.isEmpty()) {
-            ArrayProp regionsArray = new ArrayProp();
+            ArrayBlock regionsArray = new ArrayBlock();
             for (Region region : regions) {
-                ObjectProp regionObj = new ObjectProp();
-                regionObj.addChild(new ValueProp("axis", region.getAxis(), true));
-                regionObj.addChild(new ValueProp("start", region.getStart()));
-                regionObj.addChild(new ValueProp("end", region.getEnd()));
-                regionObj.addChild(new ValueProp("class", region.getCssClass(), true));
+                ObjectBlock regionObj = new ObjectBlock();
+                regionObj.addChild(new ValueBlock("axis", region.getAxis(), true));
+                regionObj.addChild(new ValueBlock("start", region.getStart()));
+                regionObj.addChild(new ValueBlock("end", region.getEnd()));
+                regionObj.addChild(new ValueBlock("class", region.getCssClass(), true));
                 regionsArray.addChild(regionObj);
             }
             addChild(regionsArray, true);

@@ -2,9 +2,9 @@ package com.martinlinha.c3faces.script.modifier;
 
 import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.model.C3ViewDataSet;
-import com.martinlinha.c3faces.script.ArrayProp;
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ArrayBlock;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.script.property.Data;
 import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.util.JSTools;
@@ -24,11 +24,11 @@ public class Load extends Modifier {
 
     @Override
     protected Property getModificationProperty() {
-        ObjectProp data = new ObjectProp();
+        ObjectBlock data = new ObjectBlock();
 
         if (getPropertyLastChange(Data.CHANGE_ADDED_NAME) != null) {
             Set<C3ViewDataSet> load = (Set<C3ViewDataSet>) getPropertyChangeSet(Data.CHANGE_ADDED_NAME);
-            data.addChild(new ValueProp("columns", new ArrayProp(JSTools.columns(load))));
+            data.addChild(new ValueBlock("columns", new ArrayBlock(JSTools.columns(load))));
         }
         if (getPropertyLastChange(Data.CHANGE_REMOVED_NAME) != null) {
             Set<C3ViewDataSet> unload = (Set<C3ViewDataSet>) getPropertyChangeSet(Data.CHANGE_REMOVED_NAME);
@@ -36,7 +36,7 @@ public class Load extends Modifier {
             for (C3ViewDataSet dataSet : unload) {
                 keys.add(dataSet.getId());
             }
-            data.addChild(new ValueProp("unload", new ArrayProp(JSTools.commaSeparatedStringsQuoted(keys))));
+            data.addChild(new ValueBlock("unload", new ArrayBlock(JSTools.commaSeparatedStringsQuoted(keys))));
         }
         return data;
     }

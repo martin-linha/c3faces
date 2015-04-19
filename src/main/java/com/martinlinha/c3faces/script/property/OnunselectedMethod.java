@@ -1,12 +1,12 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.MethodProp;
+import com.martinlinha.c3faces.script.MethodBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class OnunselectedMethod extends MethodProp {
+public class OnunselectedMethod extends MethodBlock {
 
     public OnunselectedMethod(String body, String... params) {
         super(body, params);

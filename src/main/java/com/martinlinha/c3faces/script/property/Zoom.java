@@ -1,14 +1,14 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ArrayProp;
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ArrayBlock;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class Zoom extends ObjectProp {
+public class Zoom extends ObjectBlock {
 
     public static String NAME = "zoom";
 
@@ -32,14 +32,14 @@ public class Zoom extends ObjectProp {
     @Override
     protected void preScriptBuild() {
         if (enabled != null) {
-            addChild(new ValueProp("enabled", enabled));
+            addChild(new ValueBlock("enabled", enabled));
         }
         if (rescale != null) {
-            addChild(new ValueProp("rescale", rescale));
+            addChild(new ValueBlock("rescale", rescale));
         }
 
         if (extentFrom != null && extentTo != null) {
-            addChild(new ValueProp("extent", new ArrayProp(extentFrom + ", " + extentTo)));
+            addChild(new ValueBlock("extent", new ArrayBlock(extentFrom + ", " + extentTo)));
         }
 
         if (onzoomMethodProp != null) {

@@ -7,17 +7,17 @@ import java.util.Arrays;
  *
  * @author Martin Linha
  */
-public class MethodProp extends Property {
+public class MethodBlock extends Property {
 
     private final String[] params;
 
-    public MethodProp(String eventName, String body, String... params) {
+    public MethodBlock(String eventName, String body, String... params) {
         setName(eventName);
         setBody(body);
         this.params = params;
     }
 
-    public MethodProp(String body, String... params) {
+    public MethodBlock(String body, String... params) {
         setBody(body);
         this.params = params;
     }

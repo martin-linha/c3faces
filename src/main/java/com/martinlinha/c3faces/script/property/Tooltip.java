@@ -1,13 +1,13 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.script.ObjectProp;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
  *
  * @author Martin Linha
  */
-public class Tooltip extends ObjectProp {
+public class Tooltip extends ObjectBlock {
 
     public static String NAME = "tooltip";
 
@@ -25,10 +25,10 @@ public class Tooltip extends ObjectProp {
     @Override
     protected void preScriptBuild() {
         if (show != null) {
-            addChild(new ValueProp("show", show));
+            addChild(new ValueBlock("show", show));
         }
         if (grouped != null) {
-            addChild(new ValueProp("grouped", grouped));
+            addChild(new ValueBlock("grouped", grouped));
         }
     }
 

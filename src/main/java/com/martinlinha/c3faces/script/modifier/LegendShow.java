@@ -1,7 +1,7 @@
 package com.martinlinha.c3faces.script.modifier;
 
 import com.martinlinha.c3faces.script.Modifier;
-import com.martinlinha.c3faces.script.ValueProp;
+import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.script.Property;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +16,7 @@ public class LegendShow extends Modifier {
 
     @Override
     protected Property getModificationProperty() {
-        return new ValueProp();
+        return new ValueBlock();
     }
 
     @Override
