@@ -35,6 +35,9 @@ public class DonutPropertiesTest {
         donutProperties.setShowLabel(false);
         donutProperties.setTitle("Donut test title.");
         donutProperties.setWidth(500);
-        assertEquals(StringUtils.deleteWhitespace("donut: {expand: true, width: 500, label: {show: false}, title: 'Donut test title.'}"), StringUtils.deleteWhitespace(donutProperties.getScript()));
+        
+        donutProperties.getScript();
+        
+        assertEquals(StringUtils.deleteWhitespace("donut:{ width:500, title:'Donut test title.', expand:true, label:{ show:false}}"), StringUtils.deleteWhitespace(donutProperties.getScript()));
     }
 }

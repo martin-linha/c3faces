@@ -21,6 +21,9 @@ public class BindtoTest {
     @Test
     public void testScriptBody() {
         Bindto bindto = new Bindto("divID");
+        
+        bindto.getScript();
+        
         assertEquals(StringUtils.deleteWhitespace("bindto: 'divID'"), StringUtils.deleteWhitespace(bindto.getScript()));
     }
 }

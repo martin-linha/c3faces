@@ -35,6 +35,9 @@ public class AreaTest {
     @Test
     public void testZeroBasedTrue() {
         area.setZerobased(true);
+
+        area.getScript();
+
         assertEquals(StringUtils.deleteWhitespace("area: { zerobased: true }"), StringUtils.deleteWhitespace(area.getScript()));
     }
 }

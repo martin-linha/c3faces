@@ -36,7 +36,10 @@ public class GaugePropertiesTest {
         gaugeProperties.setMax(100);
         gaugeProperties.setMin(300);
         gaugeProperties.setUnits("USD");
-        
-        assertEquals(StringUtils.deleteWhitespace("gauge: {expand: false, min: 300, max: 100, width: 10, units: 'USD'}"), StringUtils.deleteWhitespace(gaugeProperties.getScript()));
+
+        gaugeProperties.getScript();
+        gaugeProperties.getScript();
+
+        assertEquals(StringUtils.deleteWhitespace("gauge: { width: 10, min: 300, max: 100, units: 'USD', expand: false }"), StringUtils.deleteWhitespace(gaugeProperties.getScript()));
     }
 }

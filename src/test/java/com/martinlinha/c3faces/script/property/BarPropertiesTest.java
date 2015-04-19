@@ -43,6 +43,9 @@ public class BarPropertiesTest {
         BarProperties barProperties = new BarProperties();
         barProperties.setZerobased(true);
         barProperties.setWidth(10);
+        
+        barProperties.getScript();
+        
         assertEquals(StringUtils.deleteWhitespace("bar: { width: 10, zerobased: true  }"), StringUtils.deleteWhitespace(barProperties.getScript()));
     }
 }

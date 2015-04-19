@@ -694,24 +694,11 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
-    
     <tag>
         <tag-name>grids</tag-name>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.GridsProperty</component-type>
         </component>
-        <attribute>
-            <description>Set if X grids should be rendered. Default true.</description>
-            <name>showX</name>
-            <required>false</required>
-            <type>java.lang.Boolean</type>
-        </attribute>
-        <attribute>
-            <description>Set if Y grids should be rendered. Default true.</description>
-            <name>showY</name>
-            <required>false</required>
-            <type>java.lang.Boolean</type>
-        </attribute>
     </tag>
     <tag>
         <tag-name>legend</tag-name>

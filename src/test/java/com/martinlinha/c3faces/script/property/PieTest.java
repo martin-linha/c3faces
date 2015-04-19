@@ -4,15 +4,15 @@ import org.apache.commons.lang3.StringUtils;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-public class EmptyTest {
+public class PieTest {
 
     /**
      * Testing right generated script, no script
      */
     @Test
     public void testNoScript() {
-        BarProperties barProperties = new BarProperties();
-        assertEquals("", barProperties.getScript());
+        Pie pie = new Pie();
+        assertEquals("", pie.getScript());
     }
 
     /**
@@ -20,8 +20,13 @@ public class EmptyTest {
      */
     @Test
     public void testScriptCombination() {
-        BarProperties barProperties = new BarProperties();
-        barProperties.setWidth(10);
-        assertEquals(StringUtils.deleteWhitespace("bar: { width: 10 }"), StringUtils.deleteWhitespace(barProperties.getScript()));
+        Pie pie = new Pie();
+        pie.setExpand(false);
+        pie.setShowLabel(false);
+
+        pie.getScript();
+        pie.getScript();
+
+        assertEquals(StringUtils.deleteWhitespace("pie: {expand: false, label: {show: false}}"), StringUtils.deleteWhitespace(pie.getScript()));
     }
 }

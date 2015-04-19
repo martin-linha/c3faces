@@ -1,6 +1,7 @@
 package com.martinlinha.c3faces.component.property;
 
 import com.martinlinha.c3faces.script.Modifier;
+import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.script.modifier.XGrid;
 import com.martinlinha.c3faces.script.modifier.XGridAdd;
 import com.martinlinha.c3faces.script.modifier.XGridRemove;
@@ -8,8 +9,6 @@ import com.martinlinha.c3faces.script.modifier.YGrid;
 import com.martinlinha.c3faces.script.modifier.YGridAdd;
 import com.martinlinha.c3faces.script.modifier.YGridRemove;
 import com.martinlinha.c3faces.script.property.GridProperties;
-import com.martinlinha.c3faces.script.Property;
-import com.martinlinha.c3faces.util.ComponentUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -64,8 +63,6 @@ public class GridsProperty extends C3Property {
                 grid.addYGrid(entry.getKey(), entry.getValue());
             }
         }
-        grid.setShowX(ComponentUtil.parseBoolean(getAttributes().get(ATTR_SHOW_X)));
-        grid.setShowY(ComponentUtil.parseBoolean(getAttributes().get(ATTR_SHOW_Y)));
         grid.addListener(mod);
         return grid;
     }

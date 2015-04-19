@@ -4,15 +4,15 @@ import org.apache.commons.lang3.StringUtils;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-public class EmptyTest {
+public class TransitionTest {
 
     /**
      * Testing right generated script, no script
      */
     @Test
     public void testNoScript() {
-        BarProperties barProperties = new BarProperties();
-        assertEquals("", barProperties.getScript());
+        Transition transition = new Transition();
+        assertEquals("", transition.getScript());
     }
 
     /**
@@ -20,8 +20,11 @@ public class EmptyTest {
      */
     @Test
     public void testScriptCombination() {
-        BarProperties barProperties = new BarProperties();
-        barProperties.setWidth(10);
-        assertEquals(StringUtils.deleteWhitespace("bar: { width: 10 }"), StringUtils.deleteWhitespace(barProperties.getScript()));
+        Transition transition = new Transition();
+        transition.setDuration(50000);
+
+        transition.getScript();
+
+        assertEquals(StringUtils.deleteWhitespace("transition: {duration: 50000}"), StringUtils.deleteWhitespace(transition.getScript()));
     }
 }

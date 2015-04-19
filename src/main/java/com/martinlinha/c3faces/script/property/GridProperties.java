@@ -15,25 +15,19 @@ public class GridProperties extends ObjectProp {
 
     public static String NAME = "grid";
 
-    private Boolean showX;
-    private Boolean showY;
     private Map<Double, String> additionalXLines = new HashMap<>();
     private Map<Double, String> additionalYLines = new HashMap<>();
 
     public GridProperties() {
     }
 
-    public GridProperties(Boolean showX, Boolean showY, Map<Double, String> additionalXLines, Map<Double, String> additionalYLines) {
-        this.showX = showX;
-        this.showY = showY;
+    public GridProperties(Map<Double, String> additionalXLines, Map<Double, String> additionalYLines) {
         this.additionalXLines = additionalXLines;
         this.additionalYLines = additionalYLines;
     }
 
     @Override
     protected void preScriptBuild() {
-        addChild(new ObjectProp("x", new ValueProp("show", showX)));
-        addChild(new ObjectProp("y", new ValueProp("show", showY)));
 
         ObjectProp xGrids = new ObjectProp();
         xGrids.setName("x");
@@ -67,29 +61,11 @@ public class GridProperties extends ObjectProp {
         return NAME;
     }
 
-    public Boolean getShowX() {
-        return showX;
-    }
-
-    public void setShowX(Boolean showX) {
-        this.showX = showX;
-    }
-
-    public Boolean getShowY() {
-        return showY;
-    }
-
-    public void setShowY(Boolean showY) {
-        this.showY = showY;
-    }
-
     public void addXGrid(Double value, String label) {
-//        xGridAdd.getAdditionalLines().put(value, label);
         additionalXLines.put(value, label);
     }
 
     public void addYGrid(Double value, String label) {
-//        yGridAdd.getAdditionalLines().put(value, label);
         additionalYLines.put(value, label);
     }
 

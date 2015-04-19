@@ -26,24 +26,16 @@ public class Regions extends ValueProp {
     @Override
     protected void preScriptBuild() {
         if (regions != null && !regions.isEmpty()) {
-            ArrayProp array = new ArrayProp();
+            ArrayProp regionsArray = new ArrayProp();
             for (Region region : regions) {
-                ObjectProp obj = new ObjectProp();
-                if (region.getAxis() != null) {
-                    obj.addChild(new ValueProp("axis", region.getAxis(), true));
-                }
-                if (region.getStart() != null) {
-                    obj.addChild(new ValueProp("start", region.getStart()));
-                }
-                if (region.getEnd() != null) {
-                    obj.addChild(new ValueProp("end", region.getEnd()));
-                }
-                if (region.getCssClass() != null) {
-                    obj.addChild(new ValueProp("class", region.getCssClass(), true));
-                }
-                array.addChild(obj);
+                ObjectProp regionObj = new ObjectProp();
+                regionObj.addChild(new ValueProp("axis", region.getAxis(), true));
+                regionObj.addChild(new ValueProp("start", region.getStart()));
+                regionObj.addChild(new ValueProp("end", region.getEnd()));
+                regionObj.addChild(new ValueProp("class", region.getCssClass(), true));
+                regionsArray.addChild(regionObj);
             }
-            addChild(array);
+            addChild(regionsArray, true);
         }
     }
 

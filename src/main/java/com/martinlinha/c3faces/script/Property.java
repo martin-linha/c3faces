@@ -92,16 +92,20 @@ public abstract class Property {
         this.body = body;
     }
 
-    public void addChild(Property property) {
+    public void addChild(Property property, boolean removePropsEmptyName) {
         if (property == null) {
             return;
         }
 
-        removeDuplicate(property);
+        removeDuplicate(property, removePropsEmptyName);
 
         if (containsSomeBody(property)) {
             children.add(property);
         }
+    }
+
+    public void addChild(Property property) {
+        addChild(property, false);
     }
 
     public void addChildren(Collection<Property> properties) {
@@ -149,11 +153,15 @@ public abstract class Property {
         return false;
     }
 
-    private void removeDuplicate(Property property) {
+    private void removeDuplicate(Property property, boolean removePropsEmptyName) {
         Iterator<Property> i = children.iterator();
         while (i.hasNext()) {
-            Property s = i.next();
-            if (s.getName() != null && s.getName().equals(property.getName())) {
+            Property prop = i.next();
+
+            if (removePropsEmptyName && prop.getName() == null && property.getName() == null) {
+                i.remove();
+            }
+            if (prop.getName() != null && prop.getName().equals(property.getName())) {
                 i.remove();
             }
         }

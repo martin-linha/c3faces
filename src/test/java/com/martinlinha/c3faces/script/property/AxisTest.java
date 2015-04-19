@@ -56,6 +56,10 @@ public class AxisTest {
         axis.setShowY(true);
         axis.setRotated(true);
         axis.setTypeX(Axis.Type.INDEXED);
-        assertEquals(StringUtils.deleteWhitespace("axis:{[rotated:true,x:{show:true,type:indexed}],y:{show:true}}"), StringUtils.deleteWhitespace(axis.getScript()));
+
+        axis.getScript();
+        axis.getScript();
+
+        assertEquals(StringUtils.deleteWhitespace("axis:{rotated:true,x:{show:true,type:indexed},y:{show:true}}"), StringUtils.deleteWhitespace(axis.getScript()));
     }
 }

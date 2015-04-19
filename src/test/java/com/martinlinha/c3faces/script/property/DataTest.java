@@ -33,6 +33,9 @@ public class DataTest {
         data.setSelection(true);
         data.addChild(new Bindto("divId123"));
 
+        data.getScript();
+        data.getScript();
+
         assertEquals(
                 StringUtils.deleteWhitespace("data:{bindto:'divId123',columns:[['" + c3ViewDataSet.getId() + "',1,2,3,4,5]],names:{"
                         + c3ViewDataSet.getId() + ":'Name1'},colors:{" + c3ViewDataSet.getId() + ":'#EEAAEE'},type:'step',selection:{enabled:true,multiple:false}}"),
