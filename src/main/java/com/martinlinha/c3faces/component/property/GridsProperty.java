@@ -2,10 +2,8 @@ package com.martinlinha.c3faces.component.property;
 
 import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.script.Property;
-import com.martinlinha.c3faces.script.modifier.XGrid;
 import com.martinlinha.c3faces.script.modifier.XGridAdd;
 import com.martinlinha.c3faces.script.modifier.XGridRemove;
-import com.martinlinha.c3faces.script.modifier.YGrid;
 import com.martinlinha.c3faces.script.modifier.YGridAdd;
 import com.martinlinha.c3faces.script.modifier.YGridRemove;
 import com.martinlinha.c3faces.script.property.GridProperties;
@@ -30,8 +28,7 @@ public class GridsProperty extends C3Property {
         GridProperties grid = new GridProperties();
         Map<Double, String> additionalXLines = null;
         Map<Double, String> additionalYLines = null;
-        Modifier mod = new XGrid().addModifier(new YGrid())
-                .addModifier(new XGridAdd())
+        Modifier mod = new XGridAdd()
                 .addModifier(new XGridRemove())
                 .addModifier(new YGridAdd())
                 .addModifier(new YGridRemove());

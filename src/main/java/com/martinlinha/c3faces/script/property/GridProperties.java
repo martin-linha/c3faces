@@ -3,9 +3,8 @@ package com.martinlinha.c3faces.script.property;
 import com.martinlinha.c3faces.script.ArrayProp;
 import com.martinlinha.c3faces.script.ObjectProp;
 import com.martinlinha.c3faces.script.ValueProp;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,13 +14,13 @@ public class GridProperties extends ObjectProp {
 
     public static String NAME = "grid";
 
-    private Map<Double, String> additionalXLines = new HashMap<>();
-    private Map<Double, String> additionalYLines = new HashMap<>();
+    private List<Grid> additionalXLines = new ArrayList<>();
+    private List<Grid> additionalYLines = new ArrayList<>();
 
     public GridProperties() {
     }
 
-    public GridProperties(Map<Double, String> additionalXLines, Map<Double, String> additionalYLines) {
+    public GridProperties(List<Grid> additionalXLines, List<Grid> additionalYLines) {
         this.additionalXLines = additionalXLines;
         this.additionalYLines = additionalYLines;
     }
@@ -33,11 +32,11 @@ public class GridProperties extends ObjectProp {
         xGrids.setName("x");
         ArrayProp xLines = new ArrayProp();
         xLines.setName("lines");
-        for (Entry entry : additionalXLines.entrySet()) {
+        for (Grid grid : additionalXLines) {
             xLines.addChild(
                     new ObjectProp(
-                            new ValueProp("value", (Double) entry.getKey()),
-                            new ValueProp("text", (String) entry.getValue(), true)));
+                            new ValueProp("value", grid.getValue()),
+                            new ValueProp("text", grid.getText(), true)));
         }
         xGrids.addChild(xLines);
         addChild(xGrids);
@@ -46,11 +45,11 @@ public class GridProperties extends ObjectProp {
         wrapper.setName("y");
         ArrayProp linesArray = new ArrayProp();
         linesArray.setName("lines");
-        for (Entry entry : additionalYLines.entrySet()) {
+        for (Grid grid : additionalYLines) {
             linesArray.addChild(
                     new ObjectProp(
-                            new ValueProp("value", (Double) entry.getKey()),
-                            new ValueProp("text", (String) entry.getValue(), true)));
+                            new ValueProp("value", grid.getValue()),
+                            new ValueProp("text", grid.getText(), true)));
         }
         wrapper.addChild(linesArray);
         addChild(wrapper);
@@ -62,11 +61,15 @@ public class GridProperties extends ObjectProp {
     }
 
     public void addXGrid(Double value, String label) {
-        additionalXLines.put(value, label);
+        Grid grid = new Grid(value, label);
+        fireCumulatible("xGridAdd", grid);
+        additionalXLines.add(grid);
     }
 
     public void addYGrid(Double value, String label) {
-        additionalYLines.put(value, label);
+        Grid grid = new Grid(value, label);
+        fireCumulatible("yGridAdd", grid);
+        additionalYLines.add(grid);
     }
 
     public void removeYGrids() {

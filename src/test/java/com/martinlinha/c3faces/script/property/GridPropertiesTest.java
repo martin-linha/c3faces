@@ -22,7 +22,6 @@ public class GridPropertiesTest {
     public void testScriptCombination() {
         GridProperties gridProperties = new GridProperties();
 
-        gridProperties.addXGrid(1d, "test1");
         gridProperties.addXGrid(1d, "test2");
         gridProperties.addXGrid(2d, "test3");
 
@@ -39,7 +38,6 @@ public class GridPropertiesTest {
     public void testScriptCombinationMultiple() {
         GridProperties gridProperties = new GridProperties();
 
-        gridProperties.addXGrid(1d, "test1");
         gridProperties.addXGrid(1d, "test2");
         gridProperties.addXGrid(2d, "test3");
 

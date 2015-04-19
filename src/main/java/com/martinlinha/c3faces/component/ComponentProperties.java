@@ -3,8 +3,8 @@ package com.martinlinha.c3faces.component;
 import com.martinlinha.c3faces.constants.ChartType;
 import com.martinlinha.c3faces.listener.ChangeListener;
 import com.martinlinha.c3faces.listener.PropertyModifier;
-import com.martinlinha.c3faces.script.property.Data;
 import com.martinlinha.c3faces.script.Property;
+import com.martinlinha.c3faces.script.property.Data;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -65,9 +65,6 @@ public class ComponentProperties implements Serializable {
     }
 
     public void resetListeners() {
-//        for (Property prop : getProperties()) {
-//            prop.getListeners().clear();
-//        }
 
         for (Property prop : getProperties()) {
             for (ChangeListener listener : prop.getListeners()) {

@@ -2,6 +2,7 @@ package com.martinlinha.c3faces.script;
 
 import com.martinlinha.c3faces.listener.ChangeListener;
 import com.martinlinha.c3faces.listener.change.Change;
+import com.martinlinha.c3faces.listener.change.CumulatibleChange;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -117,6 +118,12 @@ public abstract class Property {
     public void fire(String name, Object value) {
         for (ChangeListener listener : listeners) {
             listener.onChange(new Change(name, value));
+        }
+    }
+
+    public void fireCumulatible(String name, Object value) {
+        for (ChangeListener listener : listeners) {
+            listener.onChange(new CumulatibleChange(name, value));
         }
     }
 
