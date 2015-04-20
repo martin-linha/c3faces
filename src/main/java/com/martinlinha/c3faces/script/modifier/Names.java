@@ -1,13 +1,12 @@
 package com.martinlinha.c3faces.script.modifier;
 
-import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.listener.change.Change;
-import com.martinlinha.c3faces.listener.change.ViewDataSetChange;
 import com.martinlinha.c3faces.model.C3ViewDataSet;
+import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.script.ObjectBlock;
+import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.script.property.Data;
-import com.martinlinha.c3faces.script.Property;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +31,7 @@ public class Names extends Modifier {
             }
         }
 
-        for (ViewDataSetChange change : getViewDataSetChanges()) {
+        for (Change change : getViewDataSetChanges()) {
             for (Object ch : change.getChangeSet()) {
                 Change propertyChange = (Change) ch;
                 if (propertyChange.getName().equals("name")) {

@@ -22,9 +22,7 @@ public class Transition extends ObjectBlock {
 
     @Override
     protected void preScriptBuild() {
-        if (duration != null) {
-            addChild(new ValueBlock("duration", duration));
-        }
+        addChild(new ValueBlock("duration", duration));
     }
 
     @Override

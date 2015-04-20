@@ -109,7 +109,7 @@ public class JSTools {
         List<C3ViewDataSet> seriesList = new ArrayList<>(series);
         for (int i = 0; i < seriesList.size(); i++) {
             C3ViewDataSet d = seriesList.get(i);
-            if (d.getDataSet().getValues().isEmpty()) {
+            if (d.getDataSet() == null || d.getDataSet().getValues() == null || d.getDataSet().getValues().isEmpty()) {
                 continue;
             }
             if (i > 0) {
@@ -124,7 +124,7 @@ public class JSTools {
             sb.append(JSTools.commaSeparatedInts(d.getDataSet().getValues()));
             sb.append("]");
         }
-        
+
         return sb.toString();
     }
 }

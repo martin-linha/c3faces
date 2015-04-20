@@ -1,9 +1,9 @@
 package com.martinlinha.c3faces.model;
 
 import com.martinlinha.c3faces.constants.ChartType;
-import com.martinlinha.c3faces.listener.change.Change;
 import com.martinlinha.c3faces.listener.ChangeListener;
-import com.martinlinha.c3faces.listener.change.ViewDataSetChange;
+import com.martinlinha.c3faces.listener.change.Change;
+import com.martinlinha.c3faces.listener.change.ViewDataSetCumulatibleChange;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,10 @@ public class C3ViewDataSet implements Serializable {
     private String name;
     private ChartType type;
     private C3DataSet dataSet;
+
+    public C3ViewDataSet() {
+        this.id = RandomStringUtils.randomAlphabetic(16);
+    }
 
     public C3ViewDataSet(String name) {
         this.name = name;
@@ -85,7 +89,7 @@ public class C3ViewDataSet implements Serializable {
 
     private void fire(String name, Object value) {
         for (ChangeListener listener : listeners) {
-            listener.onChange(new ViewDataSetChange(name, value));
+            listener.onChange(new ViewDataSetCumulatibleChange(name, value));
         }
     }
 

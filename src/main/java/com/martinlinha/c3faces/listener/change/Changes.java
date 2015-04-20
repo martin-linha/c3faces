@@ -22,11 +22,14 @@ public abstract class Changes implements ChangeListener {
         return changedProps.get(propName).getLastChange();
     }
 
-    public Set<ViewDataSetChange> getViewDataSetChanges() {
-        Set<ViewDataSetChange> set = new HashSet<>();
+    public Set<Change> getViewDataSetChanges() {
+        Set<Change> set = new HashSet<>();
         for (Entry entry : changedProps.entrySet()) {
             if (entry.getValue() instanceof ViewDataSetChange) {
                 set.add((ViewDataSetChange) entry.getValue());
+            }
+            if (entry.getValue() instanceof ViewDataSetCumulatibleChange) {
+                set.add((ViewDataSetCumulatibleChange) entry.getValue());
             }
         }
         return set;
