@@ -34,4 +34,8 @@ public class Faces {
     public static Map<String, String> getRequestParameterMap(FacesContext ctx) {
         return ctx.getExternalContext().getRequestParameterMap();
     }
+    
+    public static boolean isAjaxRequest(FacesContext ctx) {
+        return ctx.getPartialViewContext().isAjaxRequest();
+    }
 }

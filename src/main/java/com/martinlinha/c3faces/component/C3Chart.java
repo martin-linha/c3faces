@@ -33,8 +33,15 @@ import javax.faces.context.ResponseWriter;
 import javax.faces.convert.ConverterException;
 
 /**
+ * The main abstract class responsible for implementation of basic behavior of C3.js based charts.
+ *
+ * Component holds an editable value (interface EditableValueHolder and scripts (interface ClientBehaviorHolder). Submitted value is get through
+ * hidden input field, which this component also renders.
+ *
+ * Class includes dependencies required for C3.js chart drawing.
  *
  * @author Martin Linha
+ * @see <a href="http://c3faces.martinlinha.com">http://c3faces.martinlinha.com</a>
  */
 @ResourceDependencies({
     @ResourceDependency(library = "c3faces", name = "d3.min.js"),
@@ -47,8 +54,6 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
 
     private final C3Manager manager;
     private Data data;
-    private String javaScriptVar;
-    private String divId;
 
     // Components request-resist attributes ------------------------------------------------------------------
     private enum PropertyKeys {
@@ -57,39 +62,63 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     }
 
     // Constants and default values ------------------------------------------------------------------
-    private static final String DIV_APPENDER = "chart";
     private static final String HIDDEN_NAME = "Index";
     private static final String ATTR_DATA = "data";
+    private static final String EVENT_NAME = "click";
 
     // Basic settings ------------------------------------------------------------------------------
+    /**
+     * Constructor is responsible for putting a C3Manager.class instance to session, if not exists.
+     */
     public C3Chart() {
         Map<String, Object> sessionMap = Faces.getSessionMap(FacesContext.getCurrentInstance());
         sessionMap.putIfAbsent(C3Manager.SESSION_KEY, new C3Manager());
         manager = (C3Manager) sessionMap.get(C3Manager.SESSION_KEY);
     }
 
+    /**
+     * An override for UIComponent to tell JSF that component is expecting only "click" event represented by clicking on chart's value. This method
+     * should not be overriden.
+     *
+     * @return Collection of event names
+     */
     @Override
     public Collection<String> getEventNames() {
-        return Arrays.asList("click");
+        return Arrays.asList(EVENT_NAME);
     }
 
+    /**
+     * Takes the returned value and set it as default chart type. Must conform to C3.js specification or generates JS error.
+     *
+     * @return ChartType
+     */
     protected ChartType getChartType() {
         return null;
     }
 
-    // Abstract methods
+    // Abstract methods ------------------------------------------------------------------------------
+    /**
+     * List of properties that will be added as a default properties of the chart, i.e. properties that will be always rendered.
+     *
+     * @return ChartType
+     */
     public abstract List<Property> getDefaultProperties();
 
     /**
-     * Return default event name. Default points to "click"
+     * Return default event name, i.e. "click". This method should not be overriden.
      *
-     * @return click
+     * @return event name
      */
     @Override
     public String getDefaultEventName() {
-        return "click";
+        return EVENT_NAME;
     }
 
+    /**
+     * As a basic settings, the component will render itself. Override to allow another Renderer.
+     *
+     * @return Renderer type responsible for component render
+     */
     @Override
     public final String getRendererType() {
         return null;
@@ -97,9 +126,16 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
 
     // Component phase activities definition ------------------------------------------------------------
     // Decode phase ------------------------------------------------------------
-    // from https://www.java.net/node/697093
+    /**
+     * Method checks if ajax behavior is supplied and if so, decodes it. Also checks for hidden input field value whith selected chart value. If
+     * exists, set as submitted value of this component (which will be converted later).
+     *
+     * IMPORTANT! In case of override, call back this method on super type!
+     *
+     * @param context Current FacesContext instance
+     */
     @Override
-    public final void decode(FacesContext context) {
+    public void decode(FacesContext context) {
         Map<String, List<ClientBehavior>> behaviors = getClientBehaviors();
         if (behaviors.isEmpty()) {
             return;
@@ -126,32 +162,23 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     }
 
     // Encode phase -------------------------------------------------------------------------------------
+    /**
+     * Method checks if ajax behavior is supplied and if so, decodes it. Also checks for hidden input field value whith selected chart value. If
+     * exists, set as submitted value of this component (which will be converted later).
+     *
+     * IMPORTANT! In case of override, call back this method on super type!
+     *
+     * @param context Current FacesContext instance
+     * @throws java.io.IOException
+     */
     @Override
     public void encodeBegin(FacesContext context) throws IOException {
-
-        assignDataWithListeners();
-
-        javaScriptVar = JSTools.jsName(getClientId());
-        divId = getId() + DIV_APPENDER;
-        List<Property> customProperties = getDefaultProperties();
-
-        resolveFaceletProperties();
-        if (customProperties != null) {
-            getComponentProperties().addProperties(customProperties);
-        }
-        String ajaxAction = getAjaxAction(context);
-
-        String onclickScript = JSTools.semicolonSeparatedStatements("var event = 'click'",
-                "if (" + javaScriptVar + ".selected().length == 0) {"
-                + "document.getElementsByName('" + getClientId() + HIDDEN_NAME + "')[0].value = '';\n"
-                + ajaxAction + "; } else {"
-                + "document.getElementsByName('" + getClientId() + HIDDEN_NAME + "')[0].value = d.id;\n"
-                + ajaxAction
-                + "}");
-
-        addDefaultProperties(onclickScript);
-
         ResponseWriter writer = context.getResponseWriter();
+
+        assignData();
+        resolveFaceletProperties();
+        getComponentProperties().addProperties(getDefaultProperties());
+        addBasicProperties(context);
 
         writer.startElement("div", this);
         writer.writeAttribute("id", getClientId(), "id");
@@ -165,43 +192,34 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     @Override
     public void encodeEnd(FacesContext context) throws IOException {
         boolean chartExists = Faces.getRequestParameterMap(context).containsKey(getClientId() + HIDDEN_NAME);
-        String newGeneratedScript = JSBuilder.build().var(javaScriptVar).c3().generate(getComponentProperties().getProperties()).endLine().getResult();
+        String newGeneratedScript = JSBuilder.build().var(getFixedJsVar()).c3().generate(getComponentProperties().getProperties()).endLine().getResult();
         String lastGeneratedScript = getLastGeneratedScript();
-
         ResponseWriter writer = context.getResponseWriter();
 
         writer.startElement("script", this);
-        if (chartExists) {
-            System.out.println("Last generated script: " + lastGeneratedScript);
-            writer.write(lastGeneratedScript);
-        } else {
-            System.out.println("New generated script: " + newGeneratedScript);
-            writer.write(newGeneratedScript);
-        }
-        writer.endElement("script");
-        writer.endElement("div");
-        writer.startElement("input", this);
-        writer.writeAttribute("type", "hidden", "type");
-        writer.writeAttribute("name", getClientId() + HIDDEN_NAME, "name");
-        writer.writeAttribute("value", "", "value");
-        writer.endElement("input");
+        if (chartExists && Faces.isAjaxRequest(context)) {
+            String modificationScript = JSTools.semicolonSeparatedModifierScript(getComponentProperties().getPropertyModifiers(), getFixedJsVar());
 
-        if (chartExists) {
-            String modificationScript = JSTools.semicolonSeparatedModifierScript(getComponentProperties().getPropertyModifiers(), javaScriptVar);
-            System.out.println("Modification script: " + modificationScript);
-            Faces.addCallbackScript(context, javaScriptVar + ".internal.loadConfig({\n"
+            writer.write(lastGeneratedScript);
+            Faces.addCallbackScript(context, getFixedJsVar() + ".internal.loadConfig({\n"
                     + "    transition: {\n"
                     + "        duration: 350\n"
                     + "    }\n"
                     + "});");
             Faces.addCallbackScript(context, modificationScript);
+        } else {
+            writer.write(newGeneratedScript);
         }
+        writer.endElement("script");
+        writer.endElement("div");
+        encodeHiddenInput(writer);
+
         setLastGeneratedScript(newGeneratedScript);
     }
 
     @Override
     protected Object getConvertedValue(FacesContext context, Object newSubmittedValue) throws ConverterException {
-        assignDataWithListeners();
+        assignData();
         String uuid = (String) context.getExternalContext().getRequestParameterMap().get(getClientId() + HIDDEN_NAME);
         if (data != null) {
             return data.getDataSetById(uuid);
@@ -231,6 +249,22 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
         return ajaxAction;
     }
 
+    private String getFixedJsVar() {
+        return JSTools.jsName(getClientId());
+    }
+
+    private String getOnclickScript(FacesContext context) {
+        String ajaxAction = getAjaxAction(context);
+
+        return JSTools.semicolonSeparatedStatements("var event = 'click'",
+                "if (" + getFixedJsVar() + ".selected().length == 0) {"
+                + "document.getElementsByName('" + getClientId() + HIDDEN_NAME + "')[0].value = '';\n"
+                + ajaxAction + "; } else {"
+                + "document.getElementsByName('" + getClientId() + HIDDEN_NAME + "')[0].value = d.id;\n"
+                + ajaxAction
+                + "}");
+    }
+
     private void resolveFaceletProperties() {
         for (UIComponent comp : getChildren()) {
             if (comp instanceof C3Property) {
@@ -240,8 +274,8 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
         }
     }
 
-    private void addDefaultProperties(String onClickScript) {
-        OnclickMethod onClickMethod = new OnclickMethod(onClickScript, "d", "i");
+    private void addBasicProperties(FacesContext context) {
+        OnclickMethod onClickMethod = new OnclickMethod(getOnclickScript(context), "d", "i");
         getComponentProperties().getComponentData().addChild(onClickMethod);
 
         Bindto bindto = (Bindto) getComponentProperties().getProperty("bindto");
@@ -253,7 +287,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
         getComponentProperties().addProperty(new Transition(0));
     }
 
-    private void assignDataWithListeners() {
+    private void assignData() {
         if (getAttributes().get(ATTR_DATA) != null) {
             data = (Data) getAttributes().get(ATTR_DATA);
         } else {
@@ -279,11 +313,15 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
         getComponentProperties().addProperty(data);
     }
 
-    // Getters & setters ----------------------------------------------------------------------------------------------
-    public String getDivId() {
-        return divId;
+    private void encodeHiddenInput(ResponseWriter writer) throws IOException {
+        writer.startElement("input", this);
+        writer.writeAttribute("type", "hidden", "type");
+        writer.writeAttribute("name", getClientId() + HIDDEN_NAME, "name");
+        writer.writeAttribute("value", "", "value");
+        writer.endElement("input");
     }
 
+    // Getters & setters ----------------------------------------------------------------------------------------------
     public void setCssClass(String cssClass) {
         getStateHelper().put(PropertyKeys.cssClass, cssClass);
     }
