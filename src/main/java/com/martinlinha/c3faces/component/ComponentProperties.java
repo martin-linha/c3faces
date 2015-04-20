@@ -35,6 +35,9 @@ public class ComponentProperties implements Serializable {
     }
 
     public void addProperties(Collection<Property> props) {
+        if (props == null) {
+            return;
+        }
         for (Property prop : props) {
             addProperty(prop);
         }

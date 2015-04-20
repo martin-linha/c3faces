@@ -1,11 +1,11 @@
 package com.martinlinha.c3faces.script.property;
 
 import com.martinlinha.c3faces.constants.ChartType;
+import com.martinlinha.c3faces.listener.C3ViewDataObservableSet;
 import com.martinlinha.c3faces.model.C3ViewDataSet;
 import com.martinlinha.c3faces.script.ArrayBlock;
 import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.ValueBlock;
-import com.martinlinha.c3faces.listener.C3ViewDataObservableSet;
 import com.martinlinha.c3faces.util.JSTools;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,14 +40,22 @@ public class Data extends ObjectBlock {
         if (dataSetsObserver != null && !dataSetsObserver.isEmpty()) {
             ObjectBlock namesObj = new ObjectBlock();
             ObjectBlock colorsObj = new ObjectBlock();
+            ObjectBlock typesObj = new ObjectBlock();
+
             namesObj.setName("names");
             colorsObj.setName("colors");
+            typesObj.setName("types");
+
             for (C3ViewDataSet data : dataSetsObserver) {
                 namesObj.addChild(new ValueBlock(data.getId(), data.getName(), true));
                 colorsObj.addChild(new ValueBlock(data.getId(), data.getColor(), true));
+                if (data.getType() != null) {
+                    typesObj.addChild(new ValueBlock(data.getId(), data.getType().getName(), true));
+                }
             }
             addChild(namesObj);
             addChild(colorsObj);
+            addChild(typesObj);
             if (chartType != null) {
                 addChild(new ValueBlock("type", chartType.getName(), true));
             }
