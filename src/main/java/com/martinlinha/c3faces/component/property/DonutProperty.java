@@ -1,11 +1,12 @@
 package com.martinlinha.c3faces.component.property;
 
-import com.martinlinha.c3faces.script.property.DonutProperties;
 import com.martinlinha.c3faces.script.Property;
+import com.martinlinha.c3faces.script.property.DonutProperties;
 import com.martinlinha.c3faces.util.ComponentUtil;
 import javax.faces.component.FacesComponent;
 
 /**
+ * This class allows to declare visual property of type com.martinlinha.c3faces.script.property.DonutProperty in facelet.
  *
  * @author Martin Linha
  */

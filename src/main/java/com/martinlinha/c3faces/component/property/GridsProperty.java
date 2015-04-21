@@ -14,6 +14,7 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 
 /**
+ * This class allows to declare visual property of type com.martinlinha.c3faces.script.property.GridProperties in facelet.
  *
  * @author Martin Linha
  */

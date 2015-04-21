@@ -4,6 +4,7 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponentBase;
 
 /**
+ * This class allows to declare visual property of type com.martinlinha.c3faces.script.property.Region in facelet.
  *
  * @author Martin Linha
  */

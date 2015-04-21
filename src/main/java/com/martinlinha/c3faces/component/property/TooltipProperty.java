@@ -2,44 +2,22 @@ package com.martinlinha.c3faces.component.property;
 
 import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.script.property.Tooltip;
+import com.martinlinha.c3faces.util.ComponentUtil;
 import javax.faces.component.FacesComponent;
 
 /**
+ * This class allows to declare visual property of type com.martinlinha.c3faces.script.property.Tooltip in facelet.
  *
  * @author Martin Linha
  */
 @FacesComponent("com.martinlinha.c3faces.component.property.TooltipProperty")
 public class TooltipProperty extends C3Property {
 
-    private enum PropertyKeys {
-
-        show, grouped
-    }
-
-    private Property associatedProperty;
+    private static final String ATTR_SHOW = "show";
+    private static final String ATTR_GROUPED = "grouped";
 
     @Override
     public Property getAssociatedProperty() {
-        if (associatedProperty == null) {
-            associatedProperty = new Tooltip(getShow(), getGrouped());
-        }
-        return associatedProperty;
+        return new Tooltip(ComponentUtil.parseBoolean(getAttributes().get(ATTR_SHOW)), ComponentUtil.parseBoolean(getAttributes().get(ATTR_GROUPED)));
     }
-
-    public Boolean getShow() {
-        return (Boolean) getStateHelper().eval(PropertyKeys.show);
-    }
-
-    public void setShow(Boolean show) {
-        getStateHelper().put(PropertyKeys.show, show);
-    }
-
-    public Boolean getGrouped() {
-        return (Boolean) getStateHelper().eval(PropertyKeys.grouped);
-    }
-
-    public void setGrouped(Boolean grouped) {
-        getStateHelper().put(PropertyKeys.grouped, grouped);
-    }
-
 }

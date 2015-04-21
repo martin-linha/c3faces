@@ -1,7 +1,7 @@
 package com.martinlinha.c3faces.component.property;
 
-import com.martinlinha.c3faces.script.property.Region;
 import com.martinlinha.c3faces.script.Property;
+import com.martinlinha.c3faces.script.property.Region;
 import com.martinlinha.c3faces.script.property.Regions;
 import com.martinlinha.c3faces.util.ComponentUtil;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 
 /**
+ * This class allows to declare visual property of type com.martinlinha.c3faces.script.property.Regions in facelet.
  *
  * @author Martin Linha
  */

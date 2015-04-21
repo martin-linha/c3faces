@@ -3,9 +3,11 @@ package com.martinlinha.c3faces.component.property;
 import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.script.property.OnzoomMethod;
 import com.martinlinha.c3faces.script.property.Zoom;
+import com.martinlinha.c3faces.util.ComponentUtil;
 import javax.faces.component.FacesComponent;
 
 /**
+ * This class allows to declare visual property of type com.martinlinha.c3faces.script.property.Zoom in facelet.
  *
  * @author Martin Linha
  */
@@ -16,58 +18,23 @@ public class ZoomProperty extends C3Property {
 
         enabled, rescale, extentFrom, extentTo, onzoom
     }
-
-    private Property associatedProperty;
+    private static final String ATTR_ENABLED = "enabled";
+    private static final String ATTR_RESCALE = "rescale";
+    private static final String ATTR_EXTENT_FROM = "extentFrom";
+    private static final String ATTR_EXTENT_TO = "extentTo";
+    private static final String ATTR_ONZOOM = "onzoom";
 
     @Override
     public Property getAssociatedProperty() {
-        if (associatedProperty == null) {
-            OnzoomMethod prop = null;
-            if (getOnzoom() != null) {
-                prop = new OnzoomMethod(getOnzoom());
-            }
-            associatedProperty = new Zoom(getEnabled(), getRescale(), getExtentFrom(), getExtentTo(), prop);
+        String onzoomAttr = (String) getAttributes().get(ATTR_ONZOOM);
+        OnzoomMethod onzoom = null;
+        if (onzoomAttr != null) {
+            onzoom = new OnzoomMethod(onzoomAttr);
         }
-        return associatedProperty;
-    }
 
-    public Boolean getEnabled() {
-        return (Boolean) getStateHelper().eval(PropertyKeys.enabled);
-    }
-
-    public void setEnabled(Boolean enabled) {
-        getStateHelper().put(PropertyKeys.enabled, enabled);
-    }
-
-    public Boolean getRescale() {
-        return (Boolean) getStateHelper().eval(PropertyKeys.rescale);
-    }
-
-    public void setRescale(Boolean rescale) {
-        getStateHelper().put(PropertyKeys.rescale, rescale);
-    }
-
-    public Integer getExtentFrom() {
-        return (Integer) getStateHelper().eval(PropertyKeys.extentFrom);
-    }
-
-    public void setExtentFrom(Integer extentFrom) {
-        getStateHelper().put(PropertyKeys.extentFrom, extentFrom);
-    }
-
-    public Integer getExtentTo() {
-        return (Integer) getStateHelper().eval(PropertyKeys.extentTo);
-    }
-
-    public void setExtentTo(Integer extentTo) {
-        getStateHelper().put(PropertyKeys.extentTo, extentTo);
-    }
-
-    public String getOnzoom() {
-        return (String) getStateHelper().eval(PropertyKeys.onzoom);
-    }
-
-    public void setOnzoom(String onzoom) {
-        getStateHelper().put(PropertyKeys.onzoom, onzoom);
+        return new Zoom(ComponentUtil.parseBoolean(ATTR_ENABLED),
+                ComponentUtil.parseBoolean(ATTR_RESCALE),
+                ComponentUtil.parseInteger(ATTR_EXTENT_FROM),
+                ComponentUtil.parseInteger(ATTR_EXTENT_TO), onzoom);
     }
 }
