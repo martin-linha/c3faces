@@ -220,7 +220,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
             writer.write(lastGeneratedScript);
 
             // when the chart exists, activate chart animations
-            Faces.addCallbackScript(context, getFixedJsVar() + ".internal.loadConfig({transition: {duration: 350}})");
+            Faces.addCallbackScript(context, getFixedJsVar() + ".internal.loadConfig({transition: {duration: 350}}); ");
             Faces.addCallbackScript(context, modificationScript);
             resetListeners();
         } else {

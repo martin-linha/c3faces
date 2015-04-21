@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Objects of this class containes changes made on chart's visual properties.
  *
  * @author Martin Linha
  * @param <T>
@@ -21,23 +22,48 @@ public class Change<T> {
         addValue(value);
     }
 
+    /**
+     * Add new change value. Sets last change and adds new change to change set.
+     *
+     * @param value Value of change
+     */
     protected final void addValue(T value) {
         lastChangeValue = value;
         changeSet.add(value);
     }
 
+    /**
+     * If change is cumulatible, then saves all historical changes.
+     *
+     * @return True if is cumulatible
+     */
     public boolean isCumulatible() {
         return cumulatible;
     }
 
+    /**
+     * Returns set of changes.
+     *
+     * @return All change objects.
+     */
     public Set<T> getChangeSet() {
         return changeSet;
     }
 
+    /**
+     * Return last change added to instance of this class.
+     *
+     * @return Last change object
+     */
     public T getLastChange() {
         return lastChangeValue;
     }
 
+    /**
+     * Returns name of change
+     *
+     * @return Name of change
+     */
     public String getName() {
         return name;
     }

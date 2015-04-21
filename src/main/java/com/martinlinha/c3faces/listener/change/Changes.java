@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
+ * Class which implements ChangeListener and provides base implemention for collecting changes of listener.
  *
  * @author Martin Linha
  */
@@ -15,13 +16,24 @@ public abstract class Changes implements ChangeListener {
 
     private final Map<String, Change> changedProps = new HashMap<>();
 
-    public Object getPropertyLastChange(String propName) {
-        if (changedProps.get(propName) == null) {
+    /**
+     * Returns last change of property with specified name. If no change found with specified name, returns null.
+     *
+     * @param changeName Name of change
+     * @return Last added object to change instance if is found
+     */
+    public Object getPropertyLastChange(String changeName) {
+        if (changedProps.get(changeName) == null) {
             return null;
         }
-        return changedProps.get(propName).getLastChange();
+        return changedProps.get(changeName).getLastChange();
     }
 
+    /**
+     * Returns all ViewDataSetChange and ViewDataSetCumulatibleChange contained in collection of Changes.
+     *
+     * @return All ViewDataSetChange and ViewDataSetCumulatibleChange instances
+     */
     public Set<Change> getViewDataSetChanges() {
         Set<Change> set = new HashSet<>();
         for (Entry entry : changedProps.entrySet()) {
@@ -35,13 +47,25 @@ public abstract class Changes implements ChangeListener {
         return set;
     }
 
-    public Set<?> getPropertyChangeSet(String propName) {
-        if (changedProps.get(propName) == null) {
+    /**
+     * Returns set of all objects added to change instance. If no change is found, returns null.
+     *
+     * @param changeName
+     * @return Set of all objects added to change instance
+     */
+    public Set<?> getPropertyChangeSet(String changeName) {
+        if (changedProps.get(changeName) == null) {
             return null;
         }
-        return changedProps.get(propName).getChangeSet();
+        return changedProps.get(changeName).getChangeSet();
     }
 
+    /**
+     * Implements onChange method. If change is already contained in map of changes and is cumulatible, adds change to change instance. Else adds to
+     * map of changes.
+     *
+     * @param change Change to be added
+     */
     @Override
     public void onChange(Change<?> change) {
         Change changedProp = changedProps.get((String) change.getName());
@@ -52,6 +76,11 @@ public abstract class Changes implements ChangeListener {
         }
     }
 
+    /**
+     * Returns map of all changes
+     *
+     * @return Map of all changes
+     */
     public Map<String, Change> getChangedProps() {
         return changedProps;
     }
