@@ -10,7 +10,7 @@ import com.martinlinha.c3faces.script.property.Size;
  */
 public class Resize extends Modifier {
     
-    private static final String RESIZE = "RESIZE";
+    private static final String RESIZE = "resize";
 
     @Override
     protected Property getModificationProperty() {

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Class which encapsulates chart's visual properties of type com.martinlinha.c3faces.script.Property. C3Chart objects keeps instances of this class
+ * in StateHelper to keep properties for enough time.
  *
  * @author Martin Linha
  */
@@ -20,11 +22,24 @@ public class ComponentProperties implements Serializable {
 
     private final Map<String, Property> properties = new HashMap<>();
 
+    /**
+     * Returns chart's com.martinlinha.c3faces.script.property.Data object.
+     *
+     * @return Chart's Data object.
+     */
     public Data getComponentData() {
-        Data data = (Data) getProperty("data");
+        Data data = (Data) getProperty(Data.NAME);
         return data;
     }
 
+    /**
+     * Method used to add new property.
+     *
+     * WARNING! Will not be added if property of same name (property.getName()) is already contained in collection.
+     *
+     * @param property Object to be added
+     * @return True if property is added.
+     */
     public boolean addProperty(Property property) {
         boolean added = false;
         if (!properties.containsKey(property.getName())) {
@@ -34,6 +49,13 @@ public class ComponentProperties implements Serializable {
         return added;
     }
 
+    /**
+     * Adds all properties from collection.
+     *
+     * WARNING! Properties with name (property#getName()) of another property already contained in collection of this class will not be added.
+     *
+     * @param props Collection of properties to be added
+     */
     public void addProperties(Collection<Property> props) {
         if (props == null) {
             return;
@@ -43,14 +65,32 @@ public class ComponentProperties implements Serializable {
         }
     }
 
+    /**
+     * Returns property from map by property name.
+     *
+     * @param key Property name to be returned
+     * @return Property of specified name
+     */
     public Property getProperty(String key) {
         return properties.get(key);
     }
 
+    /**
+     * Returns read-only properties collection. To add new property, use ComponentProperties#addProperty().
+     *
+     * WARNING! Changes to this list won't affect chart's properties.
+     *
+     * @return Read-only list of all properties
+     */
     public List<Property> getProperties() {
         return new ArrayList<>(properties.values());
     }
 
+    /**
+     * Returns list of all objects com.martinlinha.c3faces.listener.PropertyModifier associated to all of the properties.
+     *
+     * @return List of all registered PropertyModifiers to all properties
+     */
     public List<PropertyModifier> getPropertyModifiers() {
         List<PropertyModifier> modifiers = new ArrayList<>();
         for (Property prop : getProperties()) {
@@ -63,10 +103,13 @@ public class ComponentProperties implements Serializable {
                 }
             }
         }
-
         return modifiers;
     }
 
+    /**
+     * Will call PropertyModifier#reset() on all registered objects of type com.martinlinha.c3faces.listener.PropertyModifier.
+     *
+     */
     public void resetListeners() {
 
         for (Property prop : getProperties()) {
@@ -79,15 +122,29 @@ public class ComponentProperties implements Serializable {
         }
     }
 
-    public void clearProperties() {
-        properties.clear();
-    }
-
+    /**
+     * Sets chart type specified in Data.
+     *
+     * @param type Chart type
+     */
     public void setChartType(ChartType type) {
         getComponentData().setChartType(type);
     }
 
+    /**
+     * Returns chart type specified in Data.
+     *
+     * @return type Chart type
+     */
     public ChartType getChartType() {
         return getComponentData().getChartType();
+    }
+
+    /**
+     * Method with only friendly access used to clear map of properties.
+     *
+     */
+    void clearProperties() {
+        properties.clear();
     }
 }
