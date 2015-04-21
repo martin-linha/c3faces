@@ -396,15 +396,8 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     }
 
     /**
-     * Set component properties to State helper
      *
-     * @param componentProperties
-     */
-    public void setComponentProperties(ComponentProperties componentProperties) {
-        getStateHelper().put(PropertyKeys.componentProperties, componentProperties);
-    }
-
-    /**
+     * /**
      * Get component properties from State helper
      *
      * @return component properties
@@ -412,7 +405,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     public final ComponentProperties getComponentProperties() {
         if ((ComponentProperties) getStateHelper().get(PropertyKeys.componentProperties) == null) {
             ComponentProperties componentProperties = new ComponentProperties();
-            setComponentProperties(componentProperties);
+            getStateHelper().put(PropertyKeys.componentProperties, componentProperties);
         }
         return (ComponentProperties) getStateHelper().get(PropertyKeys.componentProperties);
     }

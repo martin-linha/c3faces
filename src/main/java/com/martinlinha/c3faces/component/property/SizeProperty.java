@@ -1,7 +1,7 @@
 package com.martinlinha.c3faces.component.property;
 
-import com.martinlinha.c3faces.script.modifier.Resize;
 import com.martinlinha.c3faces.script.Property;
+import com.martinlinha.c3faces.script.modifier.Resize;
 import com.martinlinha.c3faces.script.property.Size;
 import com.martinlinha.c3faces.util.ComponentUtil;
 import javax.faces.component.FacesComponent;
@@ -18,7 +18,8 @@ public class SizeProperty extends C3Property {
 
     @Override
     public Property getAssociatedProperty() {
-        return new Size(ComponentUtil.parseInteger(getAttributes().get(ATTR_WIDTH)),
-                ComponentUtil.parseInteger(getAttributes().get(ATTR_HEIGTH)), new Resize());
+        Size size = new Size(ComponentUtil.parseInteger(getAttributes().get(ATTR_WIDTH)), ComponentUtil.parseInteger(getAttributes().get(ATTR_HEIGTH)));
+        size.addListener(new Resize());
+        return size;
     }
 }

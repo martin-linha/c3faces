@@ -1,9 +1,7 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.listener.ChangeListener;
 import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.ValueBlock;
-import java.util.Arrays;
 
 public class Legend extends ObjectBlock {
 
@@ -35,8 +33,7 @@ public class Legend extends ObjectBlock {
 
     public Legend(Position position, Boolean show, Boolean hide, InsetAnchor insetAnchor, Integer insetX, Integer insetY,
             Integer insetStep, OnclickMethod itemOnclick, OnmouseoverMethod itemOnmouseover,
-            OnmouseoutMethod itemOnmouseout, ChangeListener... listeners) {
-        addListeners(Arrays.asList(listeners));
+            OnmouseoutMethod itemOnmouseout) {
         this.position = position;
         this.show = show;
         this.hide = hide;

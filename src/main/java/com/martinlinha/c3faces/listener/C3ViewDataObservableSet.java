@@ -9,17 +9,25 @@ import java.util.Set;
  * @author Martin Linha
  */
 public class C3ViewDataObservableSet extends ObservableSet<C3ViewDataSet> {
-
+    
     public C3ViewDataObservableSet(Set<C3ViewDataSet> wrappedSet, String eventAddedName, String eventRemovedName) {
         super(wrappedSet, eventAddedName, eventRemovedName);
     }
-
+    
+    @Override
+    public void setWrappedSet(Set<C3ViewDataSet> wrappedSet) {
+        for (C3ViewDataSet c : wrappedSet) {
+            c.setListeners(getListeners());
+        }
+        super.setWrappedSet(wrappedSet);
+    }
+    
     @Override
     public boolean add(C3ViewDataSet e) {
         e.setListeners(getListeners());
         return super.add(e);
     }
-
+    
     @Override
     public boolean addAll(Collection<? extends C3ViewDataSet> c) {
         for (C3ViewDataSet data : c) {

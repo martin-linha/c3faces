@@ -24,8 +24,8 @@ public class Names extends Modifier {
     protected Property getModificationProperty() {
         ObjectBlock objProp = new ObjectBlock();
 
-        if (getPropertyLastChange(Data.CHANGE_ADDED_NAME) != null) {
-            Set<C3ViewDataSet> load = (Set<C3ViewDataSet>) getPropertyChangeSet(Data.CHANGE_ADDED_NAME);
+        if (getPropertyLastChange(Data.EVENT_VIEW_DATA_SET_ADDED) != null) {
+            Set<C3ViewDataSet> load = (Set<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_ADDED);
             for (C3ViewDataSet dataSet : load) {
                 objProp.addChild(new ValueBlock(dataSet.getId(), dataSet.getName(), true));
             }
@@ -34,11 +34,10 @@ public class Names extends Modifier {
         for (Change change : getViewDataSetChanges()) {
             for (Object ch : change.getChangeSet()) {
                 Change propertyChange = (Change) ch;
-                if (propertyChange.getName().equals("name")) {
+                if (propertyChange.getName().equals(C3ViewDataSet.EVENT_CHART_NAME)) {
                     objProp.addChild(new ValueBlock(change.getName(), (String) propertyChange.getLastChange(), true));
                 }
             }
-
         }
         return objProp;
     }

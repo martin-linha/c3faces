@@ -15,6 +15,12 @@ import org.apache.commons.lang3.RandomStringUtils;
  */
 public class C3ViewDataSet implements Serializable {
 
+    private static final int RANDOM_ID_LENGTH = 16;
+    public static String EVENT_CHART_TYPE = "viewDataSetType";
+    public static String EVENT_CHART_NAME = "viewDataSetName";
+    public static String EVENT_CHART_COLOR = "viewDataSetColor";
+    public static String EVENT_NEW_DATA_SET = "viewDataSetAddedSet";
+
     private final String id;
 
     private List<ChangeListener> listeners = new ArrayList<>();
@@ -24,19 +30,19 @@ public class C3ViewDataSet implements Serializable {
     private C3DataSet dataSet;
 
     public C3ViewDataSet() {
-        this.id = RandomStringUtils.randomAlphabetic(16);
+        this.id = RandomStringUtils.randomAlphabetic(RANDOM_ID_LENGTH);
     }
 
     public C3ViewDataSet(String name) {
         this.name = name;
-        this.id = RandomStringUtils.randomAlphabetic(16);
+        this.id = RandomStringUtils.randomAlphabetic(RANDOM_ID_LENGTH);
     }
 
     public C3ViewDataSet(String name, C3DataSet dataSet, String color) {
         this.name = name;
         this.dataSet = dataSet;
         this.color = color;
-        this.id = RandomStringUtils.randomAlphabetic(16);
+        this.id = RandomStringUtils.randomAlphabetic(RANDOM_ID_LENGTH);
     }
 
     public String getId() {
@@ -48,7 +54,7 @@ public class C3ViewDataSet implements Serializable {
     }
 
     public void setName(String name) {
-        fire(id, new Change("name", name));
+        fire(id, new Change(EVENT_CHART_NAME, name));
         this.name = name;
     }
 
@@ -57,7 +63,7 @@ public class C3ViewDataSet implements Serializable {
     }
 
     public void setColor(String color) {
-        fire(id, new Change("color", color));
+        fire(id, new Change(EVENT_CHART_COLOR, color));
         this.color = color;
     }
 
@@ -74,7 +80,7 @@ public class C3ViewDataSet implements Serializable {
     }
 
     public void setType(ChartType type) {
-        fire(id, new Change("type", type));
+        fire(id, new Change(EVENT_CHART_TYPE, type));
         this.type = type;
     }
 
@@ -83,7 +89,7 @@ public class C3ViewDataSet implements Serializable {
     }
 
     public void setDataSet(C3DataSet dataSet) {
-        // TODO fire some(?) event
+        fire(id, new Change(EVENT_NEW_DATA_SET, this));
         this.dataSet = dataSet;
     }
 

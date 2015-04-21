@@ -105,6 +105,10 @@ public class JSTools {
 
     public static String columns(Set<C3ViewDataSet> series) {
 
+        if (series.isEmpty()) {
+            return "";
+        }
+
         final StringBuilder sb = new StringBuilder();
         List<C3ViewDataSet> seriesList = new ArrayList<>(series);
         for (int i = 0; i < seriesList.size(); i++) {

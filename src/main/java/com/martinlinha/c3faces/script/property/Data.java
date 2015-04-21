@@ -18,12 +18,12 @@ public class Data extends ObjectBlock {
 
     public static String NAME = "data";
 
-    public static final String CHANGE_ADDED_NAME = "viewDataSetAdded";
-    public static final String CHANGE_REMOVED_NAME = "viewDataSetRemoved";
+    public static final String EVENT_VIEW_DATA_SET_ADDED = "viewDataSetAdded";
+    public static final String EVENT_VIEW_DATA_SET_REMOVED = "viewDataSetRemoved";
     private ChartType chartType;
     private boolean selection = true;
     private final C3ViewDataObservableSet dataSetsObserver
-            = new C3ViewDataObservableSet(new HashSet(), CHANGE_ADDED_NAME, CHANGE_REMOVED_NAME);
+            = new C3ViewDataObservableSet(new HashSet(), EVENT_VIEW_DATA_SET_ADDED, EVENT_VIEW_DATA_SET_REMOVED);
 
     public Data() {
         dataSetsObserver.setListeners(getListeners());

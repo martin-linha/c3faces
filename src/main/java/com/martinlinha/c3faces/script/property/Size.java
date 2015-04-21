@@ -1,9 +1,7 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.listener.ChangeListener;
 import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.ValueBlock;
-import java.util.Arrays;
 
 /**
  *
@@ -19,8 +17,7 @@ public class Size extends ObjectBlock {
     public Size() {
     }
 
-    public Size(Integer width, Integer height, ChangeListener... listeners) {
-        addListeners(Arrays.asList(listeners));
+    public Size(Integer width, Integer height) {
         this.width = width;
         this.height = height;
     }

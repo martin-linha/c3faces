@@ -1,11 +1,11 @@
 package com.martinlinha.c3faces.component.property;
 
+import com.martinlinha.c3faces.script.Modifier;
+import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.script.modifier.LegendHide;
 import com.martinlinha.c3faces.script.modifier.LegendShow;
-import com.martinlinha.c3faces.script.Modifier;
-import com.martinlinha.c3faces.script.property.OnclickMethod;
 import com.martinlinha.c3faces.script.property.Legend;
-import com.martinlinha.c3faces.script.Property;
+import com.martinlinha.c3faces.script.property.OnclickMethod;
 import com.martinlinha.c3faces.util.ComponentUtil;
 import javax.faces.component.FacesComponent;
 
@@ -36,7 +36,8 @@ public class LegendProperty extends C3Property {
                 ComponentUtil.parseBoolean((String) getAttributes().get(ATTR_SHOW)), ComponentUtil.parseBoolean((String) getAttributes().get(ATTR_HIDE)),
                 ComponentUtil.findEnum(Legend.InsetAnchor.class, (String) getAttributes().get(ATTR_INSET_ANCHOR)),
                 ComponentUtil.parseInteger(getAttributes().get(ATTR_INSET_X)), ComponentUtil.parseInteger(getAttributes().get(ATTR_INSET_Y)),
-                ComponentUtil.parseInteger(getAttributes().get(ATTR_INSET_STEP)), null, null, null, mod);
+                ComponentUtil.parseInteger(getAttributes().get(ATTR_INSET_STEP)), null, null, null);
+        legend.addListener(mod);
 
         String onclick = (String) getAttributes().get(ATTR_ITEM_ONCLICK);
         if (onclick != null) {

@@ -21,8 +21,8 @@ public class Colors extends Modifier {
     protected Property getModificationProperty() {
         ObjectBlock objProp = new ObjectBlock();
 
-        if (getPropertyLastChange(Data.CHANGE_ADDED_NAME) != null) {
-            Set<C3ViewDataSet> load = (Set<C3ViewDataSet>) getPropertyChangeSet(Data.CHANGE_ADDED_NAME);
+        if (getPropertyLastChange(Data.EVENT_VIEW_DATA_SET_ADDED) != null) {
+            Set<C3ViewDataSet> load = (Set<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_ADDED);
             for (C3ViewDataSet dataSet : load) {
                 objProp.addChild(new ValueBlock(dataSet.getId(), dataSet.getColor(), true));
             }
