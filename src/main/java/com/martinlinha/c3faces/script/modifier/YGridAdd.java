@@ -6,6 +6,7 @@ import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.script.property.Grid;
+import com.martinlinha.c3faces.script.property.GridProperties;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -16,21 +17,24 @@ import java.util.Set;
  */
 public class YGridAdd extends Modifier {
 
+    private static final String ADD = "add";
+    private static final String YGRIDS = "ygrids";
+
     @Override
     protected String getMethodName() {
-        return "add";
+        return ADD;
     }
 
     @Override
     public List<String> getFields() {
-        return Arrays.asList("ygrids");
+        return Arrays.asList(YGRIDS);
     }
 
     @Override
     protected Property getModificationProperty() {
         ArrayBlock ygridArray = new ArrayBlock();
 
-        Set<Grid> grids = (Set<Grid>) getPropertyChangeSet("yGridAdd");
+        Set<Grid> grids = (Set<Grid>) getPropertyChangeSet(GridProperties.EVENT_YGRID_ADDED);
         if (grids != null) {
 
             for (Grid grid : grids) {

@@ -12,6 +12,11 @@ import java.util.List;
  */
 public class GridProperties extends ObjectBlock {
 
+    public static final String EVENT_XGRID_ADDED = "xGridAdd";
+    public static final String EVENT_YGRID_ADDED = "yGridAdd";
+    public static final String EVENT_YGRID_REMOVED = "yGridRemove";
+    public static final String EVENT_XGRID_REMOVED = "xGridRemove";
+
     public static String NAME = "grid";
 
     private List<Grid> additionalXLines = new ArrayList<>();
@@ -34,8 +39,8 @@ public class GridProperties extends ObjectBlock {
         xLines.setName("lines");
         for (Grid grid : additionalXLines) {
             xLines.addChild(new ObjectBlock(
-                            new ValueBlock("value", grid.getValue()),
-                            new ValueBlock("text", grid.getText(), true)));
+                    new ValueBlock("value", grid.getValue()),
+                    new ValueBlock("text", grid.getText(), true)));
         }
         xGrids.addChild(xLines);
         addChild(xGrids);
@@ -46,8 +51,8 @@ public class GridProperties extends ObjectBlock {
         linesArray.setName("lines");
         for (Grid grid : additionalYLines) {
             linesArray.addChild(new ObjectBlock(
-                            new ValueBlock("value", grid.getValue()),
-                            new ValueBlock("text", grid.getText(), true)));
+                    new ValueBlock("value", grid.getValue()),
+                    new ValueBlock("text", grid.getText(), true)));
         }
         wrapper.addChild(linesArray);
         addChild(wrapper);
@@ -60,23 +65,23 @@ public class GridProperties extends ObjectBlock {
 
     public void addXGrid(Double value, String label) {
         Grid grid = new Grid(value, label);
-        fireCumulatible("xGridAdd", grid);
+        fireCumulatible(EVENT_XGRID_ADDED, grid);
         additionalXLines.add(grid);
     }
 
     public void addYGrid(Double value, String label) {
         Grid grid = new Grid(value, label);
-        fireCumulatible("yGridAdd", grid);
+        fireCumulatible(EVENT_YGRID_ADDED, grid);
         additionalYLines.add(grid);
     }
 
     public void removeYGrids() {
-        fire("yGridRemove", true);
+        fire(EVENT_YGRID_REMOVED, true);
         additionalYLines.clear();
     }
 
     public void removeXGrids() {
-        fire("xGridRemove", true);
+        fire(EVENT_XGRID_REMOVED, true);
         additionalXLines.clear();
     }
 }

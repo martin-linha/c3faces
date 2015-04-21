@@ -17,6 +17,9 @@ import java.util.Set;
  */
 public class Names extends Modifier {
 
+    private static final String NAMES = "names";
+    private static final  String DATA = "data";
+
     public Names() {
     }
 
@@ -44,12 +47,12 @@ public class Names extends Modifier {
 
     @Override
     public List<String> getFields() {
-        return Arrays.asList("data");
+        return Arrays.asList(DATA);
     }
 
     @Override
     protected String getMethodName() {
-        return "names";
+        return NAMES;
     }
 
     @Override

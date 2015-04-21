@@ -5,6 +5,9 @@ import com.martinlinha.c3faces.script.ValueBlock;
 
 public class Legend extends ObjectBlock {
 
+    public static final String EVENT_LEGEND_SHOW = "legendShow";
+    public static final String EVENT_LEGEND_HIDE = "legendHide";
+
     public static String NAME = "legend";
 
     private Legend.Position position;
@@ -109,7 +112,7 @@ public class Legend extends ObjectBlock {
     }
 
     public void setShow(Boolean show) {
-        fire("legendShow", show);
+        fire(EVENT_LEGEND_SHOW, show);
         this.show = show;
     }
 
@@ -118,7 +121,7 @@ public class Legend extends ObjectBlock {
     }
 
     public void setHide(Boolean hide) {
-        fire("legendHide", hide);
+        fire(EVENT_LEGEND_HIDE, hide);
         this.hide = hide;
     }
 

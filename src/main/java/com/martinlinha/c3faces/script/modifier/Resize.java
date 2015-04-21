@@ -9,6 +9,8 @@ import com.martinlinha.c3faces.script.property.Size;
  * @author Martin Linha
  */
 public class Resize extends Modifier {
+    
+    private static final String RESIZE = "RESIZE";
 
     @Override
     protected Property getModificationProperty() {
@@ -17,6 +19,6 @@ public class Resize extends Modifier {
 
     @Override
     protected String getMethodName() {
-        return "resize";
+        return RESIZE;
     }
 }

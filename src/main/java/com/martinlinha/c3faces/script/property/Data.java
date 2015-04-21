@@ -20,6 +20,8 @@ public class Data extends ObjectBlock {
 
     public static final String EVENT_VIEW_DATA_SET_ADDED = "viewDataSetAdded";
     public static final String EVENT_VIEW_DATA_SET_REMOVED = "viewDataSetRemoved";
+    public static final String EVENT_CHART_TYPE_CHANGED = "dataChartTypeChanged";
+
     private ChartType chartType;
     private boolean selection = true;
     private final C3ViewDataObservableSet dataSetsObserver
@@ -75,7 +77,7 @@ public class Data extends ObjectBlock {
     }
 
     public void setChartType(ChartType chartType) {
-        fire("chartType", chartType);
+        fire(EVENT_CHART_TYPE_CHANGED, chartType);
         this.chartType = chartType;
     }
 

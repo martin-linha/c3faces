@@ -17,6 +17,9 @@ import java.util.Set;
  */
 public class Colors extends Modifier {
 
+    private static final String COLORS = "colors";
+    private static final String DATA = "data";
+
     @Override
     protected Property getModificationProperty() {
         ObjectBlock objProp = new ObjectBlock();
@@ -43,12 +46,12 @@ public class Colors extends Modifier {
 
     @Override
     protected String getMethodName() {
-        return "colors";
+        return COLORS;
     }
 
     @Override
     public List<String> getFields() {
-        return Arrays.asList("data");
+        return Arrays.asList(DATA);
     }
 
     @Override

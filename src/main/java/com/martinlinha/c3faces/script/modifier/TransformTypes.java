@@ -17,7 +17,6 @@ public class TransformTypes extends Modifier {
     protected Property getModificationProperty() {
         getModifiers().clear();
 
-        // todo fix
         for (Change change : getViewDataSetChanges()) {
             for (Object ch : change.getChangeSet()) {
                 Change propertyChange = (Change) ch;

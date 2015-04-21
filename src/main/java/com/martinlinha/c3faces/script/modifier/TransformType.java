@@ -1,8 +1,8 @@
 package com.martinlinha.c3faces.script.modifier;
 
-import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.constants.ChartType;
 import com.martinlinha.c3faces.script.CommaValueBlock;
+import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.script.Property;
 
 /**
@@ -10,6 +10,8 @@ import com.martinlinha.c3faces.script.Property;
  * @author Martin Linha
  */
 public class TransformType extends Modifier {
+    
+    private static final String TRANSFORM = "transform";
 
     private final String id;
     private final ChartType chartType;
@@ -27,7 +29,7 @@ public class TransformType extends Modifier {
 
     @Override
     protected String getMethodName() {
-        return "transform";
+        return TRANSFORM;
     }
 
     @Override
