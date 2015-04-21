@@ -68,6 +68,9 @@ public class C3ViewDataSet implements Serializable {
     }
 
     public ChartType getType() {
+        if (type == null) {
+            return ChartType.LINE;
+        }
         return type;
     }
 

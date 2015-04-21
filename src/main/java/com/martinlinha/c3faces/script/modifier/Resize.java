@@ -12,7 +12,7 @@ public class Resize extends Modifier {
 
     @Override
     protected Property getModificationProperty() {
-        return new Size((Integer) getPropertyLastChange("width"), (Integer) getPropertyLastChange("height"));
+        return new Size((Integer) getPropertyLastChange(Size.EVENT_WIDTH_CHANGED), (Integer) getPropertyLastChange(Size.EVENT_HEIGHT_CHANGED));
     }
 
     @Override

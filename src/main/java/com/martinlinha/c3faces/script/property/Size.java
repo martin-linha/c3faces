@@ -9,6 +9,9 @@ import com.martinlinha.c3faces.script.ValueBlock;
  */
 public class Size extends ObjectBlock {
 
+    public static final String EVENT_WIDTH_CHANGED = "sizeWidthChanged";
+    public static final String EVENT_HEIGHT_CHANGED = "sizeHeightChanged";
+
     public static String NAME = "size";
 
     private Integer width;
@@ -42,7 +45,7 @@ public class Size extends ObjectBlock {
     }
 
     public void setWidth(Integer width) {
-        fire("width", width);
+        fire(EVENT_WIDTH_CHANGED, width);
         this.width = width;
     }
 
@@ -51,7 +54,7 @@ public class Size extends ObjectBlock {
     }
 
     public void setHeight(Integer height) {
-        fire("height", height);
+        fire(EVENT_HEIGHT_CHANGED, height);
         this.height = height;
     }
 }

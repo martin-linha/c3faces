@@ -31,7 +31,7 @@ public class Colors extends Modifier {
         for (Change change : getViewDataSetChanges()) {
             for (Object ch : change.getChangeSet()) {
                 Change propertyChange = (Change) ch;
-                if (propertyChange.getName().equals("color")) {
+                if (propertyChange.getName().equals(C3ViewDataSet.EVENT_CHART_COLOR)) {
                     objProp.addChild(new ValueBlock(change.getName(), (String) propertyChange.getLastChange(), true));
                 }
             }
