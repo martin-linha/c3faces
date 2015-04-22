@@ -6,7 +6,7 @@ import com.martinlinha.c3faces.model.C3ViewDataSet;
 import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.script.property.Data;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import org.apache.commons.lang3.StringUtils;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class LoadTest {
 
         data.addListener(load);
 
-        data.setDataSets(new HashSet<>(Arrays.asList(c3ViewDataSet)));
+        data.setDataSets(new LinkedHashSet<>(Arrays.asList(c3ViewDataSet)));
         data.setChartType(ChartType.BAR);
 
         c3ViewDataSet.setColor("yellow");

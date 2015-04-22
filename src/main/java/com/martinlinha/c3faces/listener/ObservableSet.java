@@ -4,6 +4,7 @@ import com.martinlinha.c3faces.listener.change.CumulatibleChange;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -19,10 +20,10 @@ public class ObservableSet<T> implements Set<T> {
 
     private final String eventAddedName;
     private final String eventRemovedName;
-    private Set<T> wrappedSet;
+    private LinkedHashSet<T> wrappedSet;
     private List<ChangeListener> listeners = new LinkedList<>();
 
-    public ObservableSet(Set<T> wrappedSet, String eventAddedName, String eventRemovedName) {
+    public ObservableSet(LinkedHashSet<T> wrappedSet, String eventAddedName, String eventRemovedName) {
         this.wrappedSet = wrappedSet;
         this.eventAddedName = eventAddedName;
         this.eventRemovedName = eventRemovedName;
@@ -60,7 +61,7 @@ public class ObservableSet<T> implements Set<T> {
      *
      * @param wrappedSet
      */
-    public void setWrappedSet(Set<T> wrappedSet) {
+    public void setWrappedSet(LinkedHashSet<T> wrappedSet) {
         for (T o : wrappedSet) {
             fireAdded(o);
         }

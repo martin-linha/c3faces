@@ -72,7 +72,11 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
      */
     public C3Chart() {
         Map<String, Object> sessionMap = Faces.getSessionMap(FacesContext.getCurrentInstance());
-        sessionMap.putIfAbsent(C3Manager.SESSION_KEY, new C3Manager());
+        C3Manager mngr = (C3Manager) sessionMap.get(C3Manager.SESSION_KEY);
+        if (mngr == null) {
+            sessionMap.put(C3Manager.SESSION_KEY, new C3Manager());
+        }
+
         manager = (C3Manager) sessionMap.get(C3Manager.SESSION_KEY);
     }
 

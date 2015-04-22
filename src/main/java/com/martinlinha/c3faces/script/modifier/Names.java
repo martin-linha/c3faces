@@ -8,8 +8,8 @@ import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.script.property.Data;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -28,7 +28,7 @@ public class Names extends Modifier {
         ObjectBlock objProp = new ObjectBlock();
 
         if (getPropertyLastChange(Data.EVENT_VIEW_DATA_SET_ADDED) != null) {
-            Set<C3ViewDataSet> load = (Set<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_ADDED);
+            LinkedHashSet<C3ViewDataSet> load = (LinkedHashSet<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_ADDED);
             for (C3ViewDataSet dataSet : load) {
                 objProp.addChild(new ValueBlock(dataSet.getId(), dataSet.getName(), true));
             }

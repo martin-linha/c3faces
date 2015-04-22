@@ -7,7 +7,7 @@ import com.martinlinha.c3faces.script.ArrayBlock;
 import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.util.JSTools;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -25,7 +25,7 @@ public class Data extends ObjectBlock {
     private ChartType chartType;
     private boolean selection = true;
     private final C3ViewDataObservableSet dataSetsObserver
-            = new C3ViewDataObservableSet(new HashSet(), EVENT_VIEW_DATA_SET_ADDED, EVENT_VIEW_DATA_SET_REMOVED);
+            = new C3ViewDataObservableSet(new LinkedHashSet<C3ViewDataSet>(), EVENT_VIEW_DATA_SET_ADDED, EVENT_VIEW_DATA_SET_REMOVED);
 
     public Data() {
         dataSetsObserver.setListeners(getListeners());
@@ -94,7 +94,7 @@ public class Data extends ObjectBlock {
         return dataSetsObserver;
     }
 
-    public void setDataSets(Set<C3ViewDataSet> dataSets) {
+    public void setDataSets(LinkedHashSet<C3ViewDataSet> dataSets) {
         this.dataSetsObserver.setWrappedSet(dataSets);
     }
 

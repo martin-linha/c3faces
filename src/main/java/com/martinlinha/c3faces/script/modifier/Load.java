@@ -10,6 +10,7 @@ import com.martinlinha.c3faces.script.ValueBlock;
 import com.martinlinha.c3faces.script.property.Data;
 import com.martinlinha.c3faces.util.JSTools;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -31,10 +32,10 @@ public class Load extends Modifier {
     @Override
     protected Property getModificationProperty() {
         ObjectBlock data = new ObjectBlock();
-        Set<C3ViewDataSet> load = new HashSet();
+        Set<C3ViewDataSet> load = new LinkedHashSet<>();
 
         if (getPropertyLastChange(Data.EVENT_VIEW_DATA_SET_ADDED) != null) {
-            load.addAll((Set< C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_ADDED));
+            load.addAll((LinkedHashSet<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_ADDED));
 
             // generate also chart types
             ObjectBlock types = new ObjectBlock();
@@ -47,7 +48,7 @@ public class Load extends Modifier {
             data.addChild(types);
         }
 
-        // if new C3DataSet object is setted, add to load list
+        // if new C3DataSet object is changes, add to load list
         for (Change change : getViewDataSetChanges()) {
             for (Object ch : change.getChangeSet()) {
                 Change propertyChange = (Change) ch;

@@ -1,6 +1,6 @@
 package com.martinlinha.c3faces.listener.change;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -13,7 +13,7 @@ public class Change<T> {
 
     private final String name;
     private T lastChangeValue;
-    private final Set<T> changeSet = new HashSet<>();
+    private final Set<T> changeSet = new LinkedHashSet<>();
     private final boolean cumulatible = false;
 
     public Change(String name, T value) {

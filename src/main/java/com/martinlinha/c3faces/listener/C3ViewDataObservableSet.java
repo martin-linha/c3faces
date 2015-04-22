@@ -2,7 +2,7 @@ package com.martinlinha.c3faces.listener;
 
 import com.martinlinha.c3faces.model.C3ViewDataSet;
 import java.util.Collection;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Concrete implementation of ObservableSet to observe changes made on set of objects of type C3ViewDataSet.
@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class C3ViewDataObservableSet extends ObservableSet<C3ViewDataSet> {
 
-    public C3ViewDataObservableSet(Set<C3ViewDataSet> wrappedSet, String eventAddedName, String eventRemovedName) {
+    public C3ViewDataObservableSet(LinkedHashSet<C3ViewDataSet> wrappedSet, String eventAddedName, String eventRemovedName) {
         super(wrappedSet, eventAddedName, eventRemovedName);
     }
 
@@ -23,7 +23,7 @@ public class C3ViewDataObservableSet extends ObservableSet<C3ViewDataSet> {
      * @param wrappedSet To be set and populated
      */
     @Override
-    public void setWrappedSet(Set<C3ViewDataSet> wrappedSet) {
+    public void setWrappedSet(LinkedHashSet<C3ViewDataSet> wrappedSet) {
         for (C3ViewDataSet c : wrappedSet) {
             c.setListeners(getListeners());
         }
