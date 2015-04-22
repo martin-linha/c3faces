@@ -1,7 +1,10 @@
 package com.martinlinha.c3faces.script.property;
 
 /**
+ * Through this class is possible to define chart's visual properties, specifically adds grid to chart.
  *
+ *
+ * @see http://c3js.org/reference.html for attrs info
  * @author Martin Linha
  */
 public class Grid {

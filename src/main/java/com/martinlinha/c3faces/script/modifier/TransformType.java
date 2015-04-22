@@ -6,11 +6,14 @@ import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.script.Property;
 
 /**
+ * Instances of this class can be registered as a listeners to listen changes fired by corresponding objects.
+ *
+ * The main mission of this class is to provide C3.js scripts for dynamic chart type changes.
  *
  * @author Martin Linha
  */
 public class TransformType extends Modifier {
-    
+
     private static final String TRANSFORM = "transform";
 
     private final String id;

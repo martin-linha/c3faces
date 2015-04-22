@@ -8,6 +8,9 @@ import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
+ * Instances of this class can be registered as a listeners to listen changes fired by corresponding objects.
+ *
+ * The main mission of this class is to provide C3.js scripts for dynamic chart type changes.
  *
  * @author Martin Linha
  */

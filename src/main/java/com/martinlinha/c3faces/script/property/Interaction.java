@@ -4,6 +4,8 @@ import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
+ * Through this class is possible to specify if interaction of chart should be enabled. Mainly used for internal reasons.
+ *
  *
  * @author Martin Linha
  */

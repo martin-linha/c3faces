@@ -5,6 +5,7 @@ import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
+ * Through this class is possible to define chart's visual properties, specifically defines the behavior of chart's zoom capabilities.
  *
  * @author Martin Linha
  */

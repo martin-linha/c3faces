@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Through this class is possible to define chart's visual properties, specifically adds Regions to chart.
  *
+ *
+ * @see http://c3js.org/reference.html for attrs info
  * @author Martin Linha
  */
 public class Regions extends ValueBlock {

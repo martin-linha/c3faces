@@ -3,6 +3,13 @@ package com.martinlinha.c3faces.script.property;
 import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.ValueBlock;
 
+/**
+ * Through this class is possible to define chart's visual properties, specifically visual properties of chart's Legend.
+ *
+ *
+ * @see http://c3js.org/reference.html for attrs info
+ * @author Martin Linha
+ */
 public class Legend extends ObjectBlock {
 
     public static final String EVENT_LEGEND_SHOW = "legendShow";

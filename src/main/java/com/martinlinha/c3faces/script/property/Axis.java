@@ -7,7 +7,10 @@ import com.martinlinha.c3faces.util.JSTools;
 import java.util.Set;
 
 /**
+ * Through this class is possible to define chart's visual properties, specifically Axis visual properties.
  *
+ *
+ * @see http://c3js.org/reference.html for attrs info
  * @author Martin Linha
  */
 public class Axis extends ObjectBlock {

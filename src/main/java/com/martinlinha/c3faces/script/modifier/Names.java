@@ -12,6 +12,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
+ * Instances of this class can be registered as a listeners to listen changes fired by corresponding objects.
+ *
+ * The main mission of this class is to provide C3.js scripts for dynamic names chart changes.
  *
  * @author Martin Linha
  */

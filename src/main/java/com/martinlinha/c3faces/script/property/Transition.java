@@ -4,6 +4,9 @@ import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
+ * Through this class is possible to specify the duration of transition animations.
+ *
+ * NOTE: Mainly used for internal reasons. The duration is setted by C3Chart, so all C3Charts subtypes inherits it.
  *
  * @author Martin Linha
  */

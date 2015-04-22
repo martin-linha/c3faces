@@ -4,7 +4,10 @@ import com.martinlinha.c3faces.script.ObjectBlock;
 import com.martinlinha.c3faces.script.ValueBlock;
 
 /**
+ * Through this class is possible to define chart's visual properties, specifically Donut visual properties.
  *
+ *
+ * @see http://c3js.org/reference.html for attrs info
  * @author Martin Linha
  */
 public class DonutProperties extends Pie {

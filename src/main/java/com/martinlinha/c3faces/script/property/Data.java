@@ -11,7 +11,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
+ * Holder of all data sets rendered in chart. Using com.martinlinha.c3faces.listener.C3ViewDataObservableSet to notify listeners with corresponding
+ * events.
  *
+ * NOTE: Each C3Chart component is forced to have instance of this class because of C3.js specifiation (all chart have to have data section, otherwise
+ * throws .js error)
+ *
+ * @see C3ViewDataObservableSet
  * @author Martin Linha
  */
 public class Data extends ObjectBlock {
@@ -76,11 +82,22 @@ public class Data extends ObjectBlock {
         return chartType;
     }
 
+    /**
+     * Sets new chart type. Change will be properly listened and listeners properly notified.
+     *
+     * @param chartType New chart type
+     */
     public void setChartType(ChartType chartType) {
         fire(EVENT_CHART_TYPE_CHANGED, chartType);
         this.chartType = chartType;
     }
 
+    /**
+     * Returns C3ViewDataSet by its unique id
+     *
+     * @param id Unique id
+     * @return C3ViewDataSet with specified unique id
+     */
     public C3ViewDataSet getDataSetById(String id) {
         for (C3ViewDataSet sets : dataSetsObserver) {
             if (sets.getId().equals(id)) {
@@ -94,6 +111,12 @@ public class Data extends ObjectBlock {
         return dataSetsObserver;
     }
 
+    /**
+     * Sets LinkedHashSet instance as a wrapped collection in C3ViewDataObservableSet object. Change will be properly listened and listeners properly
+     * notified.
+     *
+     * @param dataSets
+     */
     public void setDataSets(LinkedHashSet<C3ViewDataSet> dataSets) {
         this.dataSetsObserver.setWrappedSet(dataSets);
     }
