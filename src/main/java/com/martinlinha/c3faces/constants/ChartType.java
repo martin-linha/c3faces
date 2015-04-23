@@ -1,6 +1,7 @@
 package com.martinlinha.c3faces.constants;
 
 /**
+ * Contains enumeration of actual chart types provided by C3.js.
  *
  * @author Martin Linha
  */

@@ -20,9 +20,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class C3ViewDataSet implements Serializable {
 
     private static final int RANDOM_ID_LENGTH = 16;
-    public static String EVENT_CHART_TYPE = "viewDataSetType";
-    public static String EVENT_CHART_NAME = "viewDataSetName";
-    public static String EVENT_CHART_COLOR = "viewDataSetColor";
+    public static String EVENT_DATA_CHART_TYPE = "viewDataSetType";
+    public static String EVENT_DATA_CHART_NAME = "viewDataSetName";
+    public static String EVENT_DATA_CHART_COLOR = "viewDataSetColor";
     public static String EVENT_NEW_DATA_SET = "viewDataSetAddedSet";
 
     private final String id;
@@ -30,7 +30,7 @@ public class C3ViewDataSet implements Serializable {
     private List<ChangeListener> listeners = new ArrayList<>();
     private String color;
     private String name;
-    private ChartType type;
+    private String type;
     private C3DataSet dataSet;
 
     /**
@@ -89,7 +89,7 @@ public class C3ViewDataSet implements Serializable {
      * @param name Name to be shown on chart
      */
     public void setName(String name) {
-        fire(id, new Change(EVENT_CHART_NAME, name));
+        fire(id, new Change(EVENT_DATA_CHART_NAME, name));
         this.name = name;
     }
 
@@ -108,7 +108,7 @@ public class C3ViewDataSet implements Serializable {
      * @param color Color to be shown on chart
      */
     public void setColor(String color) {
-        fire(id, new Change(EVENT_CHART_COLOR, color));
+        fire(id, new Change(EVENT_DATA_CHART_COLOR, color));
         this.color = color;
     }
 
@@ -117,9 +117,9 @@ public class C3ViewDataSet implements Serializable {
      *
      * @return Visual chart type of data series which will be shown on chart
      */
-    public ChartType getType() {
+    public String getType() {
         if (type == null) {
-            return ChartType.LINE;
+            return ChartType.LINE.getName();
         }
         return type;
     }
@@ -147,8 +147,8 @@ public class C3ViewDataSet implements Serializable {
      *
      * @param type Visual chart type of data set
      */
-    public void setType(ChartType type) {
-        fire(id, new Change(EVENT_CHART_TYPE, type));
+    public void setType(String type) {
+        fire(id, new Change(EVENT_DATA_CHART_TYPE, type));
         this.type = type;
     }
 

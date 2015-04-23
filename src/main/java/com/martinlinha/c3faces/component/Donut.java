@@ -21,7 +21,7 @@ public class Donut extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.DONUT;
+    public String getChartType() {
+        return ChartType.DONUT.getName();
     }
 }

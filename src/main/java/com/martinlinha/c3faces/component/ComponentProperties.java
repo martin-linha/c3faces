@@ -1,6 +1,5 @@
 package com.martinlinha.c3faces.component;
 
-import com.martinlinha.c3faces.constants.ChartType;
 import com.martinlinha.c3faces.listener.ChangeListener;
 import com.martinlinha.c3faces.listener.PropertyModifier;
 import com.martinlinha.c3faces.script.Property;
@@ -125,18 +124,18 @@ public class ComponentProperties implements Serializable {
     /**
      * Sets chart type specified in Data.
      *
-     * @param type Chart type
+     * @param type Chart type (conforming to C3.js)
      */
-    public void setChartType(ChartType type) {
+    public void setChartType(String type) {
         getComponentData().setChartType(type);
     }
 
     /**
      * Returns chart type specified in Data.
      *
-     * @return type Chart type
+     * @return type Chart type (conforming to C3.js)
      */
-    public ChartType getChartType() {
+    public String getChartType() {
         return getComponentData().getChartType();
     }
 

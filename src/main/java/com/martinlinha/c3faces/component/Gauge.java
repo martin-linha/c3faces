@@ -21,7 +21,7 @@ public class Gauge extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.GAUGE;
+    public String getChartType() {
+        return ChartType.GAUGE.getName();
     }
 }

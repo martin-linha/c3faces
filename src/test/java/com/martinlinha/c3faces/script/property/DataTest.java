@@ -28,7 +28,7 @@ public class DataTest {
         Data data = new Data();
         C3ViewDataSet c3ViewDataSet = new C3ViewDataSet("Name 1", new C3DataSet(Arrays.asList(1, 2, 3, 4, 5)), "#EEAAEE");
 
-        data.setChartType(ChartType.STEP);
+        data.setChartType(ChartType.STEP.getName());
         data.setDataSets(new LinkedHashSet<>(Arrays.asList(c3ViewDataSet)));
         data.addChild(new Bindto("divId123"));
 

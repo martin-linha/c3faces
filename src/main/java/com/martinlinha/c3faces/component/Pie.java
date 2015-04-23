@@ -21,7 +21,7 @@ public class Pie extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.PIE;
+    public String getChartType() {
+        return ChartType.PIE.getName();
     }
 }

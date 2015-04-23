@@ -21,7 +21,7 @@ public class Spline extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.SPLINE;
+    public String getChartType() {
+        return ChartType.SPLINE.getName();
     }
 }

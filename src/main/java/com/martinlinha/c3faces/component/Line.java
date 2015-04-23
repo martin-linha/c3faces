@@ -21,8 +21,8 @@ public class Line extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.LINE;
+    public String getChartType() {
+        return ChartType.LINE.getName();
     }
 
 }

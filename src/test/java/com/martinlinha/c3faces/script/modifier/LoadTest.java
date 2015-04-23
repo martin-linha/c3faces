@@ -33,7 +33,7 @@ public class LoadTest {
         data.addListener(load);
 
         data.setDataSets(new LinkedHashSet<>(Arrays.asList(c3ViewDataSet)));
-        data.setChartType(ChartType.BAR);
+        data.setChartType(ChartType.BAR.getName());
 
         c3ViewDataSet.setColor("yellow");
         c3ViewDataSet.setName("new name");

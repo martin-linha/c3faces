@@ -21,7 +21,7 @@ public class Bar extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.BAR;
+    public String getChartType() {
+        return ChartType.BAR.getName();
     }
 }

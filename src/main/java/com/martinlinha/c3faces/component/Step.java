@@ -21,7 +21,7 @@ public class Step extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.STEP;
+    public String getChartType() {
+        return ChartType.STEP.getName();
     }
 }

@@ -21,7 +21,7 @@ public class Area extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.AREA;
+    public String getChartType() {
+        return ChartType.AREA.getName();
     }
 }

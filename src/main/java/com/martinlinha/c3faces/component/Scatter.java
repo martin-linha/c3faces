@@ -21,7 +21,7 @@ public class Scatter extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.SCATTER;
+    public String getChartType() {
+        return ChartType.SCATTER.getName();
     }
 }

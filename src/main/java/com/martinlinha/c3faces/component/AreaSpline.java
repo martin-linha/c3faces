@@ -21,7 +21,7 @@ public class AreaSpline extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.AREASPLINE;
+    public String getChartType() {
+        return ChartType.AREASPLINE.getName();
     }
 }

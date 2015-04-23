@@ -1,6 +1,5 @@
 package com.martinlinha.c3faces.script.modifier;
 
-import com.martinlinha.c3faces.constants.ChartType;
 import com.martinlinha.c3faces.listener.change.Change;
 import com.martinlinha.c3faces.model.C3ViewDataSet;
 import com.martinlinha.c3faces.script.Modifier;
@@ -23,8 +22,8 @@ public class TransformTypes extends Modifier {
         for (Change change : getViewDataSetChanges()) {
             for (Object ch : change.getChangeSet()) {
                 Change propertyChange = (Change) ch;
-                if (propertyChange.getName().equals(C3ViewDataSet.EVENT_CHART_TYPE)) {
-                    addModifier(new TransformType(change.getName(), (ChartType) propertyChange.getLastChange()));
+                if (propertyChange.getName().equals(C3ViewDataSet.EVENT_DATA_CHART_TYPE)) {
+                    addModifier(new TransformType(change.getName(), (String) propertyChange.getLastChange()));
                 }
             }
         }

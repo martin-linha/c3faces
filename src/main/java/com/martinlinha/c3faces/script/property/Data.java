@@ -1,6 +1,5 @@
 package com.martinlinha.c3faces.script.property;
 
-import com.martinlinha.c3faces.constants.ChartType;
 import com.martinlinha.c3faces.listener.C3ViewDataObservableSet;
 import com.martinlinha.c3faces.model.C3ViewDataSet;
 import com.martinlinha.c3faces.script.ArrayBlock;
@@ -28,7 +27,7 @@ public class Data extends ObjectBlock {
     public static final String EVENT_VIEW_DATA_SET_REMOVED = "viewDataSetRemoved";
     public static final String EVENT_CHART_TYPE_CHANGED = "dataChartTypeChanged";
 
-    private ChartType chartType;
+    private String chartType;
     private boolean selection = true;
     private final C3ViewDataObservableSet dataSetsObserver
             = new C3ViewDataObservableSet(new LinkedHashSet<C3ViewDataSet>(), EVENT_VIEW_DATA_SET_ADDED, EVENT_VIEW_DATA_SET_REMOVED);
@@ -58,15 +57,13 @@ public class Data extends ObjectBlock {
                 namesObj.addChild(new ValueBlock(data.getId(), data.getName(), true));
                 colorsObj.addChild(new ValueBlock(data.getId(), data.getColor(), true));
                 if (data.getType() != null) {
-                    typesObj.addChild(new ValueBlock(data.getId(), data.getType().getName(), true));
+                    typesObj.addChild(new ValueBlock(data.getId(), data.getType(), true));
                 }
             }
             addChild(namesObj);
             addChild(colorsObj);
             addChild(typesObj);
-            if (chartType != null) {
-                addChild(new ValueBlock("type", chartType.getName(), true));
-            }
+            addChild(new ValueBlock("type", chartType, true));
             if (isSelection()) {
                 addChild(new ObjectBlock("selection", new ValueBlock("enabled", selection), new ValueBlock("multiple", false)));
             }
@@ -78,7 +75,7 @@ public class Data extends ObjectBlock {
         return NAME;
     }
 
-    public ChartType getChartType() {
+    public String getChartType() {
         return chartType;
     }
 
@@ -87,7 +84,7 @@ public class Data extends ObjectBlock {
      *
      * @param chartType New chart type
      */
-    public void setChartType(ChartType chartType) {
+    public void setChartType(String chartType) {
         fire(EVENT_CHART_TYPE_CHANGED, chartType);
         this.chartType = chartType;
     }

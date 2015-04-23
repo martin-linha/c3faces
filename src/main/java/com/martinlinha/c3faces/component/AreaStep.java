@@ -21,7 +21,7 @@ public class AreaStep extends C3Chart {
     }
 
     @Override
-    public ChartType getChartType() {
-        return ChartType.AREASTEP;
+    public String getChartType() {
+        return ChartType.AREASTEP.getName();
     }
 }

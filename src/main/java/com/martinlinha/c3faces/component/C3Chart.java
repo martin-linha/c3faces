@@ -1,7 +1,6 @@
 package com.martinlinha.c3faces.component;
 
 import com.martinlinha.c3faces.component.property.C3Property;
-import com.martinlinha.c3faces.constants.ChartType;
 import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.script.Property;
 import com.martinlinha.c3faces.script.modifier.Colors;
@@ -96,7 +95,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
      *
      * @return ChartType
      */
-    protected ChartType getChartType() {
+    protected String getChartType() {
         return null;
     }
 
@@ -218,7 +217,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
         writer.startElement("script", this);
 
         // if chart exists and Ajax request received, use last generated script and send .js for C3.js API
-        if (chartExists && Faces.isAjaxRequest(context)) {
+        if (chartExists && Faces.isAjaxRequest(context) && !manager.isDataChanged()) {
             String modificationScript = JSTools.semicolonSeparatedModifierScript(getComponentProperties().getPropertyModifiers(), getFixedJsVar());
 
             writer.write(lastGeneratedScript);
@@ -227,6 +226,9 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
             Faces.addCallbackScript(context, getFixedJsVar() + ".internal.loadConfig({transition: {duration: 350}}); ");
             Faces.addCallbackScript(context, modificationScript);
             resetListeners();
+        } else if (chartExists && Faces.isAjaxRequest(context) && manager.isDataChanged()) {
+            writer.write(lastGeneratedScript);
+            
         } else {
             writer.write(newGeneratedScript);
         }

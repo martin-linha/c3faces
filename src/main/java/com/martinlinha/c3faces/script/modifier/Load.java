@@ -45,7 +45,7 @@ public class Load extends Modifier {
             types.setName(TYPES);
             for (C3ViewDataSet dataSet : load) {
                 if (dataSet.getType() != null) {
-                    types.addChild(new ValueBlock(dataSet.getId(), dataSet.getType().getName(), true));
+                    types.addChild(new ValueBlock(dataSet.getId(), dataSet.getType(), true));
                 }
             }
             data.addChild(types);
