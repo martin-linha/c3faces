@@ -38,35 +38,33 @@ public class Data extends ObjectBlock {
 
     @Override
     protected void preScriptBuild() {
-        if (dataSetsObserver != null && !dataSetsObserver.isEmpty()) {
+        if (!dataSetsObserver.isEmpty()) {
             addChild(new ValueBlock("columns", new ArrayBlock(JSTools.columns(dataSetsObserver))));
         } else {
             addChild(new ValueBlock("columns", new ArrayBlock(" ")));
         }
 
-        if (dataSetsObserver != null && !dataSetsObserver.isEmpty()) {
-            ObjectBlock namesObj = new ObjectBlock();
-            ObjectBlock colorsObj = new ObjectBlock();
-            ObjectBlock typesObj = new ObjectBlock();
+        ObjectBlock namesObj = new ObjectBlock();
+        ObjectBlock colorsObj = new ObjectBlock();
+        ObjectBlock typesObj = new ObjectBlock();
 
-            namesObj.setName("names");
-            colorsObj.setName("colors");
-            typesObj.setName("types");
+        namesObj.setName("names");
+        colorsObj.setName("colors");
+        typesObj.setName("types");
 
-            for (C3ViewDataSet data : dataSetsObserver) {
-                namesObj.addChild(new ValueBlock(data.getId(), data.getName(), true));
-                colorsObj.addChild(new ValueBlock(data.getId(), data.getColor(), true));
-                if (data.getType() != null) {
-                    typesObj.addChild(new ValueBlock(data.getId(), data.getType(), true));
-                }
+        for (C3ViewDataSet data : dataSetsObserver) {
+            namesObj.addChild(new ValueBlock(data.getId(), data.getName(), true));
+            colorsObj.addChild(new ValueBlock(data.getId(), data.getColor(), true));
+            if (data.getType() != null) {
+                typesObj.addChild(new ValueBlock(data.getId(), data.getType(), true));
             }
-            addChild(namesObj);
-            addChild(colorsObj);
-            addChild(typesObj);
-            addChild(new ValueBlock("type", chartType, true));
-            if (isSelection()) {
-                addChild(new ObjectBlock("selection", new ValueBlock("enabled", selection), new ValueBlock("multiple", false)));
-            }
+        }
+        addChild(namesObj);
+        addChild(colorsObj);
+        addChild(typesObj);
+        addChild(new ValueBlock("type", chartType, true));
+        if (isSelection()) {
+            addChild(new ObjectBlock("selection", new ValueBlock("enabled", selection), new ValueBlock("multiple", false)));
         }
     }
 

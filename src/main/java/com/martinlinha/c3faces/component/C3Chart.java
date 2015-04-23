@@ -11,7 +11,6 @@ import com.martinlinha.c3faces.script.modifier.TransformTypes;
 import com.martinlinha.c3faces.script.property.Bindto;
 import com.martinlinha.c3faces.script.property.Data;
 import com.martinlinha.c3faces.script.property.OnclickMethod;
-import com.martinlinha.c3faces.script.property.Transition;
 import com.martinlinha.c3faces.util.Faces;
 import com.martinlinha.c3faces.util.JSBuilder;
 import com.martinlinha.c3faces.util.JSTools;
@@ -44,20 +43,19 @@ import javax.faces.convert.ConverterException;
  */
 @ResourceDependencies({
     @ResourceDependency(library = "c3faces", name = "d3.min.js"),
-    @ResourceDependency(library = "c3faces", name = "d3.js"),
+    @ResourceDependency(library = "c3faces", name = "c3faces.js"),
     @ResourceDependency(library = "c3faces", name = "c3.min.js"),
     @ResourceDependency(library = "c3faces", name = "c3.css")
 })
 
 public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
 
-    private final C3Manager manager;
     private Data data;
 
     // Components request-resist attributes ------------------------------------------------------------------
     private enum PropertyKeys {
 
-        data, cssClass, style, componentProperties, lastGeneratedScript
+        data, cssClass, style, componentProperties, lastGeneratedScript, c3manager
     }
 
     // Constants and default values ------------------------------------------------------------------
@@ -66,19 +64,6 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     private static final String EVENT_NAME = "click";
 
     // Basic settings ------------------------------------------------------------------------------
-    /**
-     * Constructor is responsible for putting a C3Manager.class instance to session, if not exists.
-     */
-    public C3Chart() {
-        Map<String, Object> sessionMap = Faces.getSessionMap(FacesContext.getCurrentInstance());
-        C3Manager mngr = (C3Manager) sessionMap.get(C3Manager.SESSION_KEY);
-        if (mngr == null) {
-            sessionMap.put(C3Manager.SESSION_KEY, new C3Manager());
-        }
-
-        manager = (C3Manager) sessionMap.get(C3Manager.SESSION_KEY);
-    }
-
     /**
      * An override for UIComponent to tell JSF that component is expecting only "click" event represented by clicking on chart's value. This method
      * should not be overriden.
@@ -210,33 +195,24 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     @Override
     public void encodeEnd(FacesContext context) throws IOException {
         boolean chartExists = Faces.getRequestParameterMap(context).containsKey(getClientId() + HIDDEN_NAME);
-        String newGeneratedScript = JSBuilder.build().var(getFixedJsVar()).c3().generate(getComponentProperties().getProperties()).endLine().getResult();
-        String lastGeneratedScript = getLastGeneratedScript();
         ResponseWriter writer = context.getResponseWriter();
 
         writer.startElement("script", this);
 
-        // if chart exists and Ajax request received, use last generated script and send .js for C3.js API
-        if (chartExists && Faces.isAjaxRequest(context) && !manager.isDataChanged()) {
+        if (chartExists && Faces.isAjaxRequest(context) && !getC3Manager().isDataChanged()) {
             String modificationScript = JSTools.semicolonSeparatedModifierScript(getComponentProperties().getPropertyModifiers(), getFixedJsVar());
 
-            writer.write(lastGeneratedScript);
-
-            // when the chart exists, activate chart animations
-            Faces.addCallbackScript(context, getFixedJsVar() + ".internal.loadConfig({transition: {duration: 350}}); ");
+            Faces.addCallbackScript(context, JSBuilder.build().append(getClientId(), getFixedJsVar()).endLine().getResult());
             Faces.addCallbackScript(context, modificationScript);
             resetListeners();
-        } else if (chartExists && Faces.isAjaxRequest(context) && manager.isDataChanged()) {
-            writer.write(lastGeneratedScript);
-            
         } else {
-            writer.write(newGeneratedScript);
+            writer.write(JSBuilder.build().var(getFixedJsVar()).c3().generate(getComponentProperties().getProperties()).endLine().getResult());
+            writer.write(JSBuilder.build().setElement(getFixedJsVar()).endLine().getResult());
         }
+
         writer.endElement("script");
         writer.endElement("div");
         encodeHiddenInput(writer);
-
-        setLastGeneratedScript(newGeneratedScript);
     }
 
     /**
@@ -289,7 +265,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
         } else {
             getComponentProperties().addProperty(new Bindto("#" + JSTools.colonAid(getClientId())));
         }
-        getComponentProperties().addProperty(new Transition(0));
+//        getComponentProperties().addProperty(new Transition(0));
     }
 
     private void assignData() {
@@ -302,11 +278,10 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
             data.setChartType(getChartType());
         }
 
-        manager.addData(getClientId(), data);
+        getC3Manager().addData(getClientId(), data);
 
-        if (manager.isDataChanged()) {
+        if (getC3Manager().isDataChanged()) {
             getComponentProperties().clearProperties();
-
             Modifier dataModifier = new Load();
             dataModifier.addModifier(new Names());
             dataModifier.addModifier(new Colors());
@@ -402,35 +377,26 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     }
 
     /**
-     *
-     * /**
-     * Get component properties from State helper
+     * Get component properties from State helper. If not exists, creates one.
      *
      * @return component properties
      */
     public final ComponentProperties getComponentProperties() {
         if ((ComponentProperties) getStateHelper().get(PropertyKeys.componentProperties) == null) {
-            ComponentProperties componentProperties = new ComponentProperties();
-            getStateHelper().put(PropertyKeys.componentProperties, componentProperties);
+            getStateHelper().put(PropertyKeys.componentProperties, new ComponentProperties());
         }
         return (ComponentProperties) getStateHelper().get(PropertyKeys.componentProperties);
     }
 
     /**
-     * Set generated script of last chart to State helper
+     * Get component properties from State helper. If not exists, creates one.
      *
-     * @param lastGeneratedScript
+     * @return C3Manager for actual instance
      */
-    public void setLastGeneratedScript(String lastGeneratedScript) {
-        getStateHelper().put(PropertyKeys.lastGeneratedScript, lastGeneratedScript);
-    }
-
-    /**
-     * Get generated script of last chart from State helper
-     *
-     * @return last generated script
-     */
-    public String getLastGeneratedScript() {
-        return (String) getStateHelper().get(PropertyKeys.lastGeneratedScript);
+    public final C3Manager getC3Manager() {
+        if ((C3Manager) getStateHelper().get(PropertyKeys.c3manager) == null) {
+            getStateHelper().put(PropertyKeys.c3manager, new C3Manager());
+        }
+        return (C3Manager) getStateHelper().get(PropertyKeys.c3manager);
     }
 }

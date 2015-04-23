@@ -28,6 +28,7 @@ public class C3Manager implements Serializable {
      */
     public void addData(String key, Data newVal) {
         boolean dataExists = false;
+
         for (Data data : dataProperties) {
             if (data == newVal) {
                 dataExists = true;
@@ -40,11 +41,20 @@ public class C3Manager implements Serializable {
     }
 
     /**
-     * Returns true if Data instance have changed after new addition.
+     * Returns true if Data instance have changed.
      *
      * @return True if Data instance changed
      */
     public boolean isDataChanged() {
         return dataChanged;
+    }
+
+    /**
+     * Returns true if Data instance have changed after (!) new addition. Returns false if only one data object was added to set.
+     *
+     * @return True if Data instance exists and replace with new
+     */
+    public boolean isDataModified() {
+        return dataChanged && dataProperties.size() > 1;
     }
 }

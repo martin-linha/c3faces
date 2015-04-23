@@ -17,7 +17,7 @@ public class DataTest {
     @Test
     public void testScriptEmptyData() {
         Data data = new Data();
-        assertEquals(StringUtils.deleteWhitespace("data: {columns: []}"), StringUtils.deleteWhitespace(data.getScript()));
+        assertEquals(StringUtils.deleteWhitespace("data: {columns: [], selection: {enabled: true, multiple: false}}"), StringUtils.deleteWhitespace(data.getScript()));
     }
 
     /**
@@ -36,7 +36,7 @@ public class DataTest {
         data.getScript();
 
         assertEquals(
-                StringUtils.deleteWhitespace("data: {bindto: 'divId123', columns: [['" + c3ViewDataSet.getId() + "', 1, 2, 3, 4, 5]], names: {" + c3ViewDataSet.getId() + ": 'Name 1'}, colors: {" + c3ViewDataSet.getId() + ": '#EEAAEE'}, types: {" + c3ViewDataSet.getId() + ": 'line'}, type: 'step', selection: {enabled: true, multiple: false}}"),
+                StringUtils.deleteWhitespace("data: {bindto: 'divId123', columns: [['" + c3ViewDataSet.getId() + "', 1, 2, 3, 4, 5]], names: {" + c3ViewDataSet.getId() + ": 'Name 1'}, colors: {" + c3ViewDataSet.getId() + ": '#EEAAEE'}, type: 'step', selection: {enabled: true, multiple: false}}"),
                 StringUtils.deleteWhitespace(data.getScript()));
     }
 }

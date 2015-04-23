@@ -1,6 +1,5 @@
 package com.martinlinha.c3faces.model;
 
-import com.martinlinha.c3faces.constants.ChartType;
 import com.martinlinha.c3faces.listener.ChangeListener;
 import com.martinlinha.c3faces.listener.change.Change;
 import com.martinlinha.c3faces.listener.change.ViewDataSetCumulatibleChange;
@@ -113,14 +112,11 @@ public class C3ViewDataSet implements Serializable {
     }
 
     /**
-     * Returns visual chart type of data series which will be shown on chart. Corresponding to C3.js specification, default (if type is null) is LINE.
+     * Returns visual chart type of data series which will be shown on chart.
      *
      * @return Visual chart type of data series which will be shown on chart
      */
     public String getType() {
-        if (type == null) {
-            return ChartType.LINE.getName();
-        }
         return type;
     }
 

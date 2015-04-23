@@ -40,7 +40,7 @@ public class LoadTest {
 
         load.getScript("chart", 500);
 
-        assertEquals(StringUtils.deleteWhitespace("setTimeout(function () {chart.load({types: {" + c3ViewDataSet.getId() + ": 'line'}, columns: [['" + c3ViewDataSet.getId() + "', 1, 2, 3, 4, 5]]})}, 500); chart.data.colors({" + c3ViewDataSet.getId() + ": 'yellow'}); chart.data.names({" + c3ViewDataSet.getId() + ": 'new name'}); setTimeout(function () {chart.transform('bar')}, 1000);"),
+        assertEquals(StringUtils.deleteWhitespace("setTimeout(function () {chart.load({columns: [['" + c3ViewDataSet.getId() + "', 1, 2, 3, 4, 5]]})}, 500); chart.data.colors({" + c3ViewDataSet.getId() + ": 'yellow'}); chart.data.names({" + c3ViewDataSet.getId() + ": 'new name'}); setTimeout(function () {chart.transform('bar')}, 1000);"),
                 StringUtils.deleteWhitespace(load.getScript("chart", 500)));
     }
 }

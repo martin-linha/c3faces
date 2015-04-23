@@ -66,6 +66,16 @@ public class Faces {
     }
 
     /**
+     * Returns actual view map
+     *
+     * @param ctx Actual FacesContext
+     * @return Actual view map
+     */
+    public static Map<String, Object> getViewMap(FacesContext ctx) {
+        return ctx.getViewRoot().getViewMap(true);
+    }
+
+    /**
      * Returns parameter map of actual request
      *
      * @param ctx Actual FacesContext
