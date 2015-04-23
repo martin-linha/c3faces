@@ -30,7 +30,6 @@ public class DataTest {
 
         data.setChartType(ChartType.STEP);
         data.setDataSets(new LinkedHashSet<>(Arrays.asList(c3ViewDataSet)));
-        data.setSelection(true);
         data.addChild(new Bindto("divId123"));
 
         data.getScript();

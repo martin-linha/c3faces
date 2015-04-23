@@ -14,14 +14,32 @@ import java.util.Set;
  */
 public class JSTools {
 
+    /**
+     * Returns escaped colon for .js.
+     *
+     * @param val To be escaped
+     * @return Escaped colon for .js
+     */
     public static String colonAid(String val) {
         return val.replace(":", "\\\\:");
     }
 
+    /**
+     * Returns string which has replace all ":" chars with "$"
+     *
+     * @param val To be modified
+     * @return Modified value
+     */
     public static String jsName(String val) {
         return val.replace(":", "$");
     }
 
+    /**
+     * Returns all integers from specified collection in a comma seperated string.
+     *
+     * @param values To be comma separated
+     * @return Integers from specified collection in a comma seperated string
+     */
     public static String commaSeparatedInts(Collection<Integer> values) {
         final StringBuilder sb = new StringBuilder();
         for (Integer value : values) {
@@ -33,6 +51,12 @@ public class JSTools {
         return sb.toString();
     }
 
+    /**
+     * Returns all string from specified collection in a comma seperated string.
+     *
+     * @param values To be comma separated
+     * @return Strings from specified collection in a comma seperated string
+     */
     public static String commaSeparatedStrings(Collection<String> values) {
         final StringBuilder sb = new StringBuilder();
         for (String value : values) {
@@ -44,6 +68,12 @@ public class JSTools {
         return sb.toString();
     }
 
+    /**
+     * Returns all string from specified collection in a comma seperated and quoted string.
+     *
+     * @param values To be comma separated and quoted
+     * @return Strings from specified collection in a comma seperated and quoted string
+     */
     public static String commaSeparatedStringsQuoted(Collection<String> values) {
         final StringBuilder sb = new StringBuilder();
         for (String value : values) {
@@ -57,6 +87,12 @@ public class JSTools {
         return sb.toString();
     }
 
+    /**
+     * Returns all string from specified collection in a semicolon seperated string.
+     *
+     * @param values To be semicolon separated
+     * @return Strings from specified collection in a semicolon seperated string
+     */
     public static String semicolonSeparatedStatements(List<String> values) {
         final StringBuilder sb = new StringBuilder();
         List<String> vals = new ArrayList<>();
@@ -89,6 +125,13 @@ public class JSTools {
         return semicolonSeparatedStatements(Arrays.asList(values));
     }
 
+    /**
+     * Returns all scripts from specified Modifier collection in a semicolon seperated string.
+     *
+     * @param modifiers Modifiers which will generates their modification script
+     * @param parent Javascript name of chart
+     * @return Scripts from specified Modifier collection in a semicolon seperated string
+     */
     public static String semicolonSeparatedModifierScript(List<PropertyModifier> modifiers, String parent) {
         int timeOut = 0;
         StringBuilder sb = new StringBuilder();
@@ -103,6 +146,12 @@ public class JSTools {
         return sb.toString();
     }
 
+    /**
+     * Returns string containing data values from C3ViewDataSet in a columns block corresponding to C3.js syntax.
+     *
+     * @param series To be added in columns block
+     * @return Generated script containing columns block
+     */
     public static String columns(Set<C3ViewDataSet> series) {
 
         if (series.isEmpty()) {
