@@ -22,7 +22,7 @@ public class C3ViewDataSet implements Serializable {
     public static String EVENT_DATA_CHART_TYPE = "viewDataSetType";
     public static String EVENT_DATA_CHART_NAME = "viewDataSetName";
     public static String EVENT_DATA_CHART_COLOR = "viewDataSetColor";
-    public static String EVENT_NEW_DATA_SET = "viewDataSetAddedSet";
+    public static String EVENT_DATA_SET_CHANGE = "viewDataSetChangedSet";
 
     private final String id;
 
@@ -163,7 +163,7 @@ public class C3ViewDataSet implements Serializable {
      * @param dataSet New data set
      */
     public void setDataSet(C3DataSet dataSet) {
-        fire(id, new Change(EVENT_NEW_DATA_SET, this));
+        fire(id, new Change(EVENT_DATA_SET_CHANGE, this));
         this.dataSet = dataSet;
     }
 

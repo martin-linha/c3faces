@@ -3,6 +3,7 @@
     <namespace>http://c3faces.martinlinha.com/ns</namespace>
     <tag>
         <tag-name>step</tag-name>
+        <description>Generates chart of type STEP.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.Step</component-type>
         </component>
@@ -46,9 +47,11 @@
                 </type>
             </deferred-value>
         </attribute>
+        
     </tag>
     <tag>
         <tag-name>spline</tag-name>
+        <description>Generates chart of type SPLINE.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.Spline</component-type>
         </component>
@@ -96,6 +99,7 @@
     
     <tag>
         <tag-name>scatter</tag-name>
+        <description>Generates chart of type SCATTER.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.Scatter</component-type>
         </component>
@@ -142,7 +146,8 @@
     </tag>
     
     <tag>
-        <tag-name>pie</tag-name>
+        <tag-name>pie</tag-name>        
+        <description>Generates chart of type PIE.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.Pie</component-type>
         </component>
@@ -189,6 +194,7 @@
     </tag>
     <tag>
         <tag-name>line</tag-name>
+        <description>Generates chart of type LINE.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.Line</component-type>
         </component>
@@ -235,6 +241,7 @@
     </tag>
     <tag>
         <tag-name>gauge</tag-name>
+        <description>Generates chart of type GAUGE.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.Gauge</component-type>
         </component>
@@ -281,6 +288,7 @@
     </tag>
     <tag>
         <tag-name>donut</tag-name>
+        <description>Generates chart of type DONUT.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.Donut</component-type>
         </component>
@@ -328,6 +336,7 @@
         
     <tag>
         <tag-name>areaSpline</tag-name>
+        <description>Generates chart of type AREA-SPLINE.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.AreaSpline</component-type>
         </component>
@@ -375,6 +384,7 @@
     
     <tag>
         <tag-name>bar</tag-name>
+        <description>Generates chart of type BAR.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.Bar</component-type>
         </component>
@@ -421,6 +431,7 @@
     </tag>
     <tag>
         <tag-name>area</tag-name>
+        <description>Generates chart of type AREA.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.Area</component-type>
         </component>
@@ -466,8 +477,8 @@
         </attribute>
     </tag>
     <tag>
-
         <tag-name>areaStep</tag-name>
+        <description>Generates chart of type AREA-STEP.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.AreaStep</component-type>
         </component>
@@ -514,7 +525,8 @@
     </tag>
     
     <tag>
-        <tag-name>zoom</tag-name>
+        <tag-name>Allows user to zoom on chart.</tag-name>
+        <description>Generates chart of type ZOOM.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.ZoomProperty</component-type>
         </component>
@@ -551,6 +563,7 @@
     </tag>
     <tag>
         <tag-name>tooltip</tag-name>
+        <description>Allows specification of visual attributes of chart's tooltip.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.TooltipProperty</component-type>
         </component>
@@ -570,6 +583,7 @@
     
     <tag>
         <tag-name>donutProperties</tag-name>
+        <description>Allows specify additional visual attributes of DONUT chart.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.DonutProperty</component-type>
         </component>
@@ -600,6 +614,7 @@
     </tag>
     <tag>
         <tag-name>barProperties</tag-name>
+        <description>Allows specify additional visual attributes of BAR chart.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.BarProperty</component-type>
         </component>
@@ -618,6 +633,7 @@
     </tag>
     <tag>
         <tag-name>gaugeProperties</tag-name>
+        <description>Allows specify additional visual attributes of GAUGE chart.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.GaugeProperty</component-type>
         </component>
@@ -659,6 +675,7 @@
         </attribute>
     </tag>
     <tag>
+        <description>Adds a new grid on X axis. Must be nested in grids tag.</description>
         <tag-name>gridX</tag-name>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.GridXProperty</component-type>
@@ -678,6 +695,7 @@
     </tag>
     <tag>
         <tag-name>gridY</tag-name>
+        <description>Adds a new grid on Y axis. Must be nested in grids tag.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.GridYProperty</component-type>
         </component>
@@ -696,12 +714,14 @@
     </tag>
     <tag>
         <tag-name>grids</tag-name>
+        <description>Tag nests components GridX and GridY for specifying grids rendered on chart.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.GridsProperty</component-type>
         </component>
     </tag>
     <tag>
         <tag-name>legend</tag-name>
+        <description>Allows specification of visual attributes of chart's legend.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.LegendProperty</component-type>
         </component>
@@ -769,6 +789,7 @@
     </tag>
     <tag>
         <tag-name>padding</tag-name>
+        <description>Allows to specify chart's padding.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.PaddingProperty</component-type>
         </component>
@@ -799,6 +820,7 @@
     </tag>
     <tag>
         <tag-name>pieProperties</tag-name>
+        <description>Allows specify additional visual attributes of PIE chart.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.PieProperty</component-type>
         </component>
@@ -817,6 +839,7 @@
     </tag>
     <tag>
         <tag-name>point</tag-name>
+        <description>Allows specification of visual attributes of chart's points.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.PointProperty</component-type>
         </component>
@@ -853,12 +876,14 @@
     </tag>
     <tag>
         <tag-name>regions</tag-name>
+        <description>Tag which holds region components.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.RegionsProperty</component-type>
         </component>
     </tag>
     <tag>
         <tag-name>region</tag-name>
+        <description>Adds a new region rendered on chart.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.RegionProperty</component-type>
         </component>
@@ -889,6 +914,7 @@
     </tag>
     <tag>
         <tag-name>size</tag-name>
+        <description>Allows to specify chart's size.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.SizeProperty</component-type>
         </component>
@@ -907,6 +933,7 @@
     </tag>
     <tag>
         <tag-name>subchart</tag-name>
+        <description>Allows to render subchart and to specify its visual attributes.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.SubchartProperty</component-type>
         </component>
@@ -931,6 +958,7 @@
     </tag>
     <tag>
         <tag-name>transition</tag-name>
+        <description>Defines attributes of chart's transitioning.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.TransitionProperty</component-type>
         </component>

@@ -1,13 +1,7 @@
 package com.martinlinha.c3faces.component;
 
 import com.martinlinha.c3faces.component.property.C3Property;
-import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.script.Property;
-import com.martinlinha.c3faces.script.modifier.Colors;
-import com.martinlinha.c3faces.script.modifier.Load;
-import com.martinlinha.c3faces.script.modifier.Names;
-import com.martinlinha.c3faces.script.modifier.Transform;
-import com.martinlinha.c3faces.script.modifier.TransformTypes;
 import com.martinlinha.c3faces.script.property.Bindto;
 import com.martinlinha.c3faces.script.property.Data;
 import com.martinlinha.c3faces.script.property.OnclickMethod;
@@ -51,6 +45,7 @@ import javax.faces.convert.ConverterException;
 public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
 
     private Data data;
+    private boolean dataChanged;
 
     // Components request-resist attributes ------------------------------------------------------------------
     private enum PropertyKeys {
@@ -199,7 +194,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
 
         writer.startElement("script", this);
 
-        if (chartExists && Faces.isAjaxRequest(context) && !getC3Manager().isDataChanged()) {
+        if (chartExists && Faces.isAjaxRequest(context) && !dataChanged) {
             String modificationScript = JSTools.semicolonSeparatedModifierScript(getComponentProperties().getPropertyModifiers(), getFixedJsVar());
 
             Faces.addCallbackScript(context, JSBuilder.build().append(getClientId(), getFixedJsVar()).endLine().getResult());
@@ -278,19 +273,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
             data.setChartType(getChartType());
         }
 
-        getC3Manager().addData(getClientId(), data);
-
-        if (getC3Manager().isDataChanged()) {
-            getComponentProperties().clearProperties();
-            Modifier dataModifier = new Load();
-            dataModifier.addModifier(new Names());
-            dataModifier.addModifier(new Colors());
-            dataModifier.addModifier(new Transform());
-            dataModifier.addModifier(new TransformTypes());
-            data.addListener(dataModifier);
-        }
-
-        getComponentProperties().addProperty(data);
+        dataChanged = getComponentProperties().addProperty(data);
     }
 
     private void encodeHiddenInput(ResponseWriter writer) throws IOException {
@@ -386,17 +369,5 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
             getStateHelper().put(PropertyKeys.componentProperties, new ComponentProperties());
         }
         return (ComponentProperties) getStateHelper().get(PropertyKeys.componentProperties);
-    }
-
-    /**
-     * Get component properties from State helper. If not exists, creates one.
-     *
-     * @return C3Manager for actual instance
-     */
-    public final C3Manager getC3Manager() {
-        if ((C3Manager) getStateHelper().get(PropertyKeys.c3manager) == null) {
-            getStateHelper().put(PropertyKeys.c3manager, new C3Manager());
-        }
-        return (C3Manager) getStateHelper().get(PropertyKeys.c3manager);
     }
 }

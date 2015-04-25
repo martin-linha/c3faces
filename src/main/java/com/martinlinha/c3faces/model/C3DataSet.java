@@ -1,6 +1,5 @@
 package com.martinlinha.c3faces.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,9 +13,9 @@ import java.util.List;
  */
 public class C3DataSet {
 
-    private List<Integer> values = new ArrayList();
+    private final List<? extends Number> values;
 
-    public C3DataSet(List<Integer> values) {
+    public C3DataSet(List<? extends Number> values) {
         this.values = Collections.unmodifiableList(values);
     }
 
@@ -25,7 +24,7 @@ public class C3DataSet {
      *
      * @return Data series
      */
-    public List<Integer> getValues() {
+    public List<? extends Number> getValues() {
         return values;
     }
 }

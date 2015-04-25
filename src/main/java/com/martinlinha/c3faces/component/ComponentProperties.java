@@ -2,7 +2,13 @@ package com.martinlinha.c3faces.component;
 
 import com.martinlinha.c3faces.listener.ChangeListener;
 import com.martinlinha.c3faces.listener.PropertyModifier;
+import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.script.Property;
+import com.martinlinha.c3faces.script.modifier.Colors;
+import com.martinlinha.c3faces.script.modifier.Load;
+import com.martinlinha.c3faces.script.modifier.Names;
+import com.martinlinha.c3faces.script.modifier.Transform;
+import com.martinlinha.c3faces.script.modifier.TransformTypes;
 import com.martinlinha.c3faces.script.property.Data;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,6 +26,7 @@ import java.util.Map;
 public class ComponentProperties implements Serializable {
 
     private final Map<String, Property> properties = new HashMap<>();
+    private boolean lastDataChanged;
 
     /**
      * Returns chart's com.martinlinha.c3faces.script.property.Data object.
@@ -46,6 +53,24 @@ public class ComponentProperties implements Serializable {
             added = true;
         }
         return added;
+    }
+
+    boolean addProperty(Data data) {
+        Data oldData = (Data) properties.get(Data.NAME);
+        properties.put(Data.NAME, data);
+
+        boolean addedNew = oldData == null ? true : data != oldData;
+
+        if (addedNew) {
+            Modifier dataModifier = new Load();
+            dataModifier.addModifier(new Names());
+            dataModifier.addModifier(new Colors());
+            dataModifier.addModifier(new Transform());
+            dataModifier.addModifier(new TransformTypes());
+            data.addListener(dataModifier);
+        }
+        System.out.println("DATA CHANGED: " + addedNew);
+        return addedNew;
     }
 
     /**

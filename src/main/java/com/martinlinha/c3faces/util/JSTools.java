@@ -35,14 +35,14 @@ public class JSTools {
     }
 
     /**
-     * Returns all integers from specified collection in a comma seperated string.
+     * Returns all numbers from specified collection in a comma seperated string.
      *
      * @param values To be comma separated
      * @return Integers from specified collection in a comma seperated string
      */
-    public static String commaSeparatedInts(Collection<Integer> values) {
+    public static String commaSeparatedNumbers(Collection<? extends Number> values) {
         final StringBuilder sb = new StringBuilder();
-        for (Integer value : values) {
+        for (Number value : values) {
             if (sb.length() > 0) {
                 sb.append(", ");
             }
@@ -174,7 +174,7 @@ public class JSTools {
             if (d.getDataSet().getValues().size() > 0) {
                 sb.append(", ");
             }
-            sb.append(JSTools.commaSeparatedInts(d.getDataSet().getValues()));
+            sb.append(JSTools.commaSeparatedNumbers(d.getDataSet().getValues()));
             sb.append("]");
         }
 

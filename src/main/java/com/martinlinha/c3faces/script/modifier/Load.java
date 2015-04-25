@@ -36,6 +36,8 @@ public class Load extends Modifier {
     protected Property getModificationProperty() {
         ObjectBlock data = new ObjectBlock();
         Set<C3ViewDataSet> load = new LinkedHashSet<>();
+        Set<C3ViewDataSet> unload = new LinkedHashSet<>();
+        Set<String> keys = new HashSet<>();
 
         if (getPropertyLastChange(Data.EVENT_VIEW_DATA_SET_ADDED) != null) {
             load.addAll((LinkedHashSet<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_ADDED));
@@ -51,12 +53,17 @@ public class Load extends Modifier {
             data.addChild(types);
         }
 
-        // if new C3DataSet object is changes, add to load list
+        // if new C3DataSet object changes, add to load list
         for (Change change : getViewDataSetChanges()) {
             for (Object ch : change.getChangeSet()) {
                 Change propertyChange = (Change) ch;
-                if (propertyChange.getName().equals(C3ViewDataSet.EVENT_NEW_DATA_SET)) {
-                    load.add((C3ViewDataSet) propertyChange.getLastChange());
+                if (propertyChange.getName().equals(C3ViewDataSet.EVENT_DATA_SET_CHANGE)) {
+                    C3ViewDataSet set = (C3ViewDataSet) propertyChange.getLastChange();
+                    if (set.getDataSet() != null) {
+                        load.add(set);
+                    } else {
+                        keys.add(set.getId());
+                    }
                 }
             }
         }
@@ -64,14 +71,14 @@ public class Load extends Modifier {
         data.addChild(new ValueBlock(COLUMNS, new ArrayBlock(JSTools.columns(load))));
 
         if (getPropertyLastChange(Data.EVENT_VIEW_DATA_SET_REMOVED) != null) {
-            Set<C3ViewDataSet> unload = (Set<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_REMOVED);
-            Set<String> keys = new HashSet<>();
+            unload.addAll((Set<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_REMOVED));
 
             for (C3ViewDataSet dataSet : unload) {
                 keys.add(dataSet.getId());
             }
-            data.addChild(new ValueBlock(UNLOAD, new ArrayBlock(JSTools.commaSeparatedStringsQuoted(keys))));
         }
+        data.addChild(new ValueBlock(UNLOAD, new ArrayBlock(JSTools.commaSeparatedStringsQuoted(keys))));
+
         return data;
     }
 }

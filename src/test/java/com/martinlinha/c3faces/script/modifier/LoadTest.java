@@ -5,8 +5,11 @@ import com.martinlinha.c3faces.model.C3DataSet;
 import com.martinlinha.c3faces.model.C3ViewDataSet;
 import com.martinlinha.c3faces.script.Modifier;
 import com.martinlinha.c3faces.script.property.Data;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -28,7 +31,9 @@ public class LoadTest {
                 .addModifier(new Transform())
                 .addModifier(new TransformTypes());
         Data data = new Data();
-        C3ViewDataSet c3ViewDataSet = new C3ViewDataSet("Name 1", new C3DataSet(Arrays.asList(1, 2, 3, 4, 5)), "#EEAAEE");
+        List<Number> numbers = new ArrayList<>();
+        Collections.addAll(numbers, 1, 2, 3, 4, 5);
+        C3ViewDataSet c3ViewDataSet = new C3ViewDataSet("Name 1", new C3DataSet(numbers), "#EEAAEE");
 
         data.addListener(load);
 
