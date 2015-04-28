@@ -26,7 +26,6 @@ import java.util.Map;
 public class ComponentProperties implements Serializable {
 
     private final Map<String, Property> properties = new HashMap<>();
-    private boolean lastDataChanged;
 
     /**
      * Returns chart's com.martinlinha.c3faces.script.property.Data object.
@@ -55,6 +54,12 @@ public class ComponentProperties implements Serializable {
         return added;
     }
 
+    /**
+     * Adds new Data to properties collection. New Data instance also injects with basic listeners.
+     *
+     * @param data Data to be added
+     * @return Returns true, if Data instance is new or changed from last addition
+     */
     boolean addProperty(Data data) {
         Data oldData = (Data) properties.get(Data.NAME);
         properties.put(Data.NAME, data);
@@ -69,7 +74,6 @@ public class ComponentProperties implements Serializable {
             dataModifier.addModifier(new TransformTypes());
             data.addListener(dataModifier);
         }
-        System.out.println("DATA CHANGED: " + addedNew);
         return addedNew;
     }
 
@@ -144,24 +148,6 @@ public class ComponentProperties implements Serializable {
                 }
             }
         }
-    }
-
-    /**
-     * Sets chart type specified in Data.
-     *
-     * @param type Chart type (conforming to C3.js)
-     */
-    public void setChartType(String type) {
-        getComponentData().setChartType(type);
-    }
-
-    /**
-     * Returns chart type specified in Data.
-     *
-     * @return type Chart type (conforming to C3.js)
-     */
-    public String getChartType() {
-        return getComponentData().getChartType();
     }
 
     /**

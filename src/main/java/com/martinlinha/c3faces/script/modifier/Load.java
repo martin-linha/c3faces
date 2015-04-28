@@ -37,7 +37,7 @@ public class Load extends Modifier {
         ObjectBlock data = new ObjectBlock();
         Set<C3ViewDataSet> load = new LinkedHashSet<>();
         Set<C3ViewDataSet> unload = new LinkedHashSet<>();
-        Set<String> keys = new HashSet<>();
+        Set<String> keyToUnload = new HashSet<>();
 
         if (getPropertyLastChange(Data.EVENT_VIEW_DATA_SET_ADDED) != null) {
             load.addAll((LinkedHashSet<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_ADDED));
@@ -62,7 +62,7 @@ public class Load extends Modifier {
                     if (set.getDataSet() != null) {
                         load.add(set);
                     } else {
-                        keys.add(set.getId());
+                        keyToUnload.add(set.getId());
                     }
                 }
             }
@@ -74,10 +74,10 @@ public class Load extends Modifier {
             unload.addAll((Set<C3ViewDataSet>) getPropertyChangeSet(Data.EVENT_VIEW_DATA_SET_REMOVED));
 
             for (C3ViewDataSet dataSet : unload) {
-                keys.add(dataSet.getId());
+                keyToUnload.add(dataSet.getId());
             }
         }
-        data.addChild(new ValueBlock(UNLOAD, new ArrayBlock(JSTools.commaSeparatedStringsQuoted(keys))));
+        data.addChild(new ValueBlock(UNLOAD, new ArrayBlock(JSTools.commaSeparatedStringsQuoted(keyToUnload))));
 
         return data;
     }

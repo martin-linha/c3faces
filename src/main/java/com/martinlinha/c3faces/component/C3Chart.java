@@ -33,7 +33,7 @@ import javax.faces.convert.ConverterException;
  * Class includes dependencies required for C3.js chart drawing.
  *
  * @author Martin Linha
- * @see <a href="http://c3faces.martinlinha.com">http://c3faces.martinlinha.com</a>
+ * @see <a href="http://c3faces.martinlinha.com">c3faces.martinlinha.com</a>
  */
 @ResourceDependencies({
     @ResourceDependency(library = "c3faces", name = "d3.min.js"),
@@ -260,7 +260,6 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
         } else {
             getComponentProperties().addProperty(new Bindto("#" + JSTools.colonAid(getClientId())));
         }
-//        getComponentProperties().addProperty(new Transition(0));
     }
 
     private void assignData() {
@@ -316,7 +315,7 @@ public abstract class C3Chart extends UIInput implements ClientBehaviorHolder {
     }
 
     /**
-     * Reset listeners for all chart's properties
+     * Resets listeners for all chart's properties
      */
     public void resetListeners() {
         getComponentProperties().resetListeners();

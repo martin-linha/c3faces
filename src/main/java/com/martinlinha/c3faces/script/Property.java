@@ -154,7 +154,7 @@ public abstract class Property {
 
     /**
      * Adds new composite child to instance of this class. If property of same name already exists in collection of this instance, removes it first.
- If removePropsWithEmptyName is true, it also removes all properties with empty name strings.
+     * If removePropsWithEmptyName is true, it also removes all properties with empty name strings.
      *
      * @param property To be added
      * @param removePropsWithEmptyName If true, removes all child properties with empty names

@@ -42,7 +42,7 @@ public class Faces {
      * @param script Script to be added
      */
     public static void addCallbackScript(FacesContext ctx, String script) {
-        C3PartialViewContext.getCurrentInstance(ctx).addCallbackScripts(script);
+        C3PartialViewContext.getCurrentInstance(ctx).addCallbackScript(script);
     }
 
     /**

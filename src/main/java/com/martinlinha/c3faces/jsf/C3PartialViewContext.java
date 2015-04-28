@@ -33,7 +33,7 @@ public class C3PartialViewContext extends PartialViewContextWrapper {
      *
      * @param script To be evaluated
      */
-    public void addCallbackScripts(String script) {
+    public void addCallbackScript(String script) {
         if (callbackScripts == null) {
             callbackScripts = new ArrayList<>();
         }
