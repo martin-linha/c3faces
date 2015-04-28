@@ -525,8 +525,8 @@
     </tag>
     
     <tag>
-        <tag-name>Allows user to zoom on chart.</tag-name>
-        <description>Generates chart of type ZOOM.</description>
+        <tag-name>zoom</tag-name>
+        <description>Allows user to zoom on chart.</description>
         <component>
             <component-type>com.martinlinha.c3faces.component.property.ZoomProperty</component-type>
         </component>
