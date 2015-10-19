@@ -1,12 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.martinlinha</groupId>
     <artifactId>C3Faces</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-FINAL</version>
     <packaging>jar</packaging>
-    <name>C3Faces core</name>
     
+    <name>${project.groupId}:${project.artifactId}</name>
+    <url>http://c3faces.martinlinha.com/</url>
+    <description>
+        C3Faces is C3.js based JSF framework. Its API can be used to create 
+        C3.js charts with dynamically changing complex visual animations. It 
+        also contains out of the box set of components to start rendering these 
+        charts immediately.
+    </description>
+  
+    <scm>
+        <url>https://github.com/martin-linha/c3faces.git</url>
+    </scm>
+  
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+  
+    <!--
+    
+    TODO what kind of license will be used?!
+    
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    -->
+    
+    <developers>
+        <developer>
+            <name>Martin Linha</name>
+            <email>some@mail.com</email> <!-- TODO put your public email here! -->
+        </developer>
+    </developers>
+    
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+  
     <dependencies>
         <dependency>
             <groupId>com.sun.faces</groupId>
@@ -49,9 +120,4 @@
             <version>4.12</version>
         </dependency>
     </dependencies>
-    <properties>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-    </properties>
-    
 </project>
